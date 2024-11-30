@@ -2,8 +2,10 @@
   "name": "rs",
   "version": "1.0.0",
   "description": "Sistema de controle de produção da empresa Acttus",
-  "main": "index.js",
+  "main": "server/index.js",
+  "type": "module",
   "scripts": {
+	"app":"nodemon /server/index.js",
     "test": "Aplicação funcionando",
     "start": "nodemon app.js",
 	"test:jest": "jest",
