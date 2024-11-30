@@ -18,13 +18,19 @@ jobs:
       with:
         node-version: 16
 
+    - name: Navigate to Code Directory
+      run: cd Codigo
+
     - name: Install dependencies
+      working-directory: Codigo
       run: npm install
 
     - name: Run unit tests
+      working-directory: Codigo
       run: npm test
 
     - name: Build application
+      working-directory: Codigo
       run: npm run build
 
   deploy:
@@ -33,6 +39,7 @@ jobs:
 
     steps:
     - name: Deploy to Docker
+      working-directory: Codigo
       run: |
         docker build -t acttus-cosmeticos .
         docker run -d -p 3000:3000 acttus-cosmeticos
