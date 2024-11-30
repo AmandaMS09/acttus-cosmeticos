@@ -28,6 +28,7 @@ import { cadastraEmbalagem, selectEmbalagem, deleteEmbalagem, updateEmbalagem, l
 import { cadastrarFormula, selectFormula, deleteFormula, listarFormulas, listarFormulasId } from "./controllers/formula.js";
 import { cadastrarProduto, produtoHasEmbalagem, deletePHasE, listarProdutos, deleteProduto, updateProduto } from "./controllers/produto.js";
 import { cadastrarRotuloHasFornecedor, cadastraFornecedorHasEmbalagem, selectFornecedores, cadastraFornecedor, updateFornecedor, deleteFornecedor, listarFornecedoresE, listarFornecedoresRotulo, deleteFornecedorRotulo, deleteFornecedorE, deleteFRelacaoMP, deleteFRelacaoE, deleteFRelacaoR, listarFornecedorMateriaPrimaMin, listarFornecedorRotuloMin } from "./controllers/fornecedor.js";
+import { adicionaObservacao, listarProducoes, listarProducaoEspecifica, listarMateriaPrimaDaProducao, listarRotuloDaProducao, listarMudancas, producoesUltimaSemana } from "./controllers/producao.js";
 
 /* ROUTES */
 app.get("/", function (res) {
@@ -98,6 +99,13 @@ app.post("/deleteFRelacaoE", deleteFRelacaoE)
 app.post("/deleteFRelacaoR", deleteFRelacaoR)
 app.post("/listarFornecedorMateriaPrimaMin", listarFornecedorMateriaPrimaMin)
 app.post("/listarFornecedorRotuloMin", listarFornecedorRotuloMin)
+app.post("/adicionaObservacao", adicionaObservacao)
+app.post("/listarProducoes", listarProducoes)
+app.post("/listarProducaoEspecifica", listarProducaoEspecifica)
+app.post("/listarMateriaPrimaDaProducao", listarMateriaPrimaDaProducao)
+app.post("/listarRotuloDaProducao", listarRotuloDaProducao)
+app.post("/listarMudancas", listarMudancas)
+app.post("/producoesUltimaSemana", producoesUltimaSemana)
 
 /* SERVER CONFIG */
 const PORT = 3303
