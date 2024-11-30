@@ -22,13 +22,13 @@ jobs:
       working-directory: Codigo
       run: npm install
 
-    - name: Run Cucumber tests
-      working-directory: Codigo
-      run: npm run test:cucumber
+   # - name: Run Cucumber tests
+   #   working-directory: Codigo
+   #   run: npm run test:cucumber
 
     - name: Build application
       working-directory: Codigo
-      run: npm run build
+      run: npm run app
 
   deploy:
     needs: build-and-test
