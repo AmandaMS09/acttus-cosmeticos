@@ -1,0 +1,282 @@
+#poligons {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+/*--------------------------------------------------------------------------*/
+
+.materiaPrima-modal-historico, .rotulo-modal-historico {
+    margin-bottom: 30px;
+}
+
+body {
+    display: flex;
+    align-items: normal;
+    justify-content: start !important;
+}
+
+/*--------------------------------------------------------------------------*/
+
+.tudo {
+    display: flex;
+    min-width: 100%;
+    flex-direction: row;
+    /*align-content: space-between;*/
+    
+}
+
+/*--------------------------------------------------------------------------*/
+
+.tudo > aside {
+    position: sticky;
+    top: 150px;
+}
+.tabela-meses {
+    background-color: #7571A0;
+    padding: 20px;
+    border-radius: 10px;
+    
+    max-width: 250px;
+    width: 100%;
+    height: 425px;  
+    align-content: end;
+    margin-right: 5%;
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+aside {
+    position: relative;
+}
+
+.produto-historico {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.escrita-mes, .insumo, .MP-marcador {
+    font-size: 40px;
+    margin-bottom: -5;
+}
+
+.escrita-data {
+
+}
+
+.infoProducao{
+    margin: 30px;
+    max-width: 60%;
+    width: 100%;
+}
+
+.enche-buraco {
+    max-width: 20%;
+    width: 100%;
+}
+
+@media (max-width: 1200px) {
+    .enche-buraco {
+        max-width: 10%;
+        width: 100%;
+    }
+}
+
+@media (max-width: 1600px) {
+    .enche-buraco {
+        max-width: 0%;
+        width: 0%;
+    }
+}
+
+@media (max-width: 1700px) {
+    .enche-buraco {
+        max-width: 10%;
+        width: 100%;
+    }
+}
+
+/*modal*/
+.modal-content {
+    border-radius: 15px;
+    min-width: 100%;
+}
+.modal-body {
+    width: 100%;
+    padding-left: 20px !important;
+    padding-top: 20px !important;
+}
+.infoPrincipalModal {
+    /*min-width: 100%;
+    width: 50%;*/
+}
+.infoSecundariaModal {
+    /*min-width: 100%;
+    width: 50%;*/
+}
+/**/
+
+/*Info de dentro da caixa*/
+.produto-historico, .item {
+    background-color: #7571A0;
+    padding: 15px;
+    border-radius: 10px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.informacao-escrita {
+    font-size: 23px;
+}
+
+#nome-do-produto {
+    min-width: 25%;
+    margin-left: 10px;
+}
+
+#data-de-producao {
+    min-width: 25%;
+}
+
+#qtd-produzida {
+    min-width: 25%;
+}
+
+#btn-de-info{
+    min-width: 8%;
+}
+/*---*/
+
+.tm-info {
+    display: flex;
+    padding: 10px;
+    margin: 10px;
+}
+
+.m {
+    display: flex;
+    margin: 10px;
+    width: 100%;
+    flex-direction: column;
+    gap: 10px
+    ;
+}
+
+
+.nm {
+    color: white;
+    width: 100%;
+}
+
+.nm, .nm:hover {
+
+    font-size: large;
+    background-color: #8985bd;
+    padding: 8px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+
+.titulo-m {
+   
+} 
+
+
+
+.titulo-nm {
+    align-content: center;
+}
+
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+    
+}
+
+button.botao-de-info, button.botao-de-info:focus{
+    background: #514B96;
+    color: white;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    border: none;
+    padding: 2px 10px;
+    font-size: 20px;
+}
+
+button.botao-de-info:hover, button.botao-de-info:focus{
+    background: #5a51af !important;
+    color: white !important;
+}
+
+
+.mes{
+    scroll-margin-top: 150px;
+}
+
+#navegacaoMin{
+    flex-basis: content !important;
+    flex-grow: unset !important;
+}
+
+.form-check{
+    width: 25px;
+}
+
+.insumo{
+    scroll-margin-top: 100px;
+
+}
+
+
+
+
+/* PARA TRANSFORMAR A LINHA EM CARD */
+
+@media (max-width: 1050px) {
+    
+    .produto-historico {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: space-between;
+        max-width: 200px;
+        padding-left: 20px;
+    }
+
+    .info-inicio{
+        padding-right: 70px;
+        
+    }
+    .info-mid {
+        padding-left: 70px;
+        padding-right: 70px;
+    }
+    .info-final {
+        padding-left: 70px;
+    }
+}
+
+
+
+.modal{
+    max-width: 50%;
+  }
+
+
+.escrita-mes {
+    display: none;
+}
+

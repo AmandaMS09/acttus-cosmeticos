@@ -1,0 +1,23 @@
+div#fornecedores>div>div>label, div#fornecedores>div>div>.campo{
+    font-size: 20px !important;
+}
+
+div#fornecedores>div>div:last-child{
+    display: flex;
+    flex-direction: row;
+}
+
+div#fornecedores>div>div:last-child>div{
+    display: flex;
+    flex-direction: column;
+}
+
+div#fornecedores>div>div:last-child>div>label{
+    font-size: 20px !important;
+}
+
+div#fornecedores{
+    max-height: 175px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

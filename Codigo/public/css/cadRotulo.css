@@ -1,0 +1,109 @@
+body{ 
+    padding: 15px;
+    background-color: #2b2a30;
+    width: 70%;
+}
+
+form{
+    height: 100%;
+}
+
+.esq{
+    padding-right: 30px;
+}
+
+.dir{
+    padding-left: 30px;
+}
+
+#fim, #fim>div{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: start;
+    justify-content: start;
+}
+
+table#fornecedores>tbody{
+    max-height: 80px;
+    overflow-y: auto;
+}
+
+@media (max-width: 824px) {
+
+    .esq{
+        padding: 15px;
+    }
+    
+    .dir{
+        padding: 15px;
+    }
+}
+
+#titulo{
+    grid-area: titulo;
+}
+
+#divNome{
+    grid-area: divNome;
+}
+
+#divTamanho{
+    grid-area: divTamanho;
+}
+
+#divPS{
+    grid-area: divPS;
+}
+
+#divRotCont{
+    grid-area: divRotCont;
+}
+
+#divRotCont{
+    grid-area: divRotCont;
+}
+
+#divFornecedor{
+    grid-area: divFornecedor;
+}
+
+
+#fim{
+    grid-area: fim;
+}
+
+#grid{
+    display: grid;
+    grid-template-areas:
+    "titulo titulo titulo titulo titulo titulo"
+    "divNome divNome divNome divFornecedor divFornecedor divFornecedor"
+    "divTamanho divTamanho divTamanho divFornecedor divFornecedor divFornecedor"
+    "divPS divPS divPS divFornecedor divFornecedor divFornecedor"
+    "divRotCont divRotCont divRotCont divFornecedor divFornecedor divFornecedor"
+    "fim fim fim fim fim fim";
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+    gap: 10px 35px;
+}
+
+@media (max-width: 1660px) {
+    body{
+        padding: 15px;
+        background-color: #2b2a30;
+        width: 80%;
+    }
+}
+@media (max-width: 1450px) {
+    body{
+        padding: 15px;
+        background-color: #2b2a30;
+        width: 90%;
+    }
+}
+@media (max-width: 1290px) {
+    body{
+        padding: 15px;
+        background-color: #2b2a30;
+        width: 100%;
+    }
+}

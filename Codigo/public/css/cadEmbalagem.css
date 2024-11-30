@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+.titulo {
+    margin-top: 7%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.esquerda-cima {
+    border-right: 10%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.esquerda-baixo {
+    border-right: 10%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15%;
+    justify-content: center;
+    gap: 20px;
+}
+
+.direita, .subdireita2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.subdireita, .subdireita2 {
+    padding-bottom: 10px;
+}
+
+.subdireita, .subdireita3 {
+    display: flex;
+    flex-direction: row;
+}
+
+/*.campo {
+    width: 30%;
+}*/
+
+
+
+.direita {
+    margin-left: 100px;
+    /*justify-content: space-between;*/
+}
+
+.entrada {
+    padding-right: 20px;
+    width:400px;
+    margin-bottom: 10%;
+}
+
+.btnInfo {
+    font-size: 87%;
+    
+}
+
+.btn {
+    margin-bottom: 10%;
+    margin-right: 10px;
+    size: 10px;
+}
+
+.subdireita3 {
+    margin-bottom: 10%;
+}
+
+.btnOpt2 {
+    min-height: 100%;
+    margin-right: 2%;
+
+}
+
+.campo {
+    margin-right: 2%;
+}
+
+.btnCadastrar {
+    width: 15%;
+}
+
+.btnOpt1 {
+    margin-bottom: 20%;
+    min-height: 45px;
+}
+
+.btnx {
+    margin-top: 2.7%;
+    margin-right: 1.8%;
+}
+
+.divInfoXXX {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.infoXXX {
+    margin-right: 3%;
+    font-size: 130%;
+}
+
+/*.subdireita2 {
+    scroll-behavior: auto;
+    overflow-y: scroll;
+  }*/
+
+
+  #fornecedores {
+    align-items: start;
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+ 
+  /* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #5a51af;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #5a51af;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+
+  #fade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 5;
+  }
+  
+  #modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: column;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 650px;
+    max-width: 90%;
+    background-color: #7571A0;
+    padding: 1.2rem;
+    border-radius: 0.5rem;
+    z-index: 10;
+  }
+  
+  #fade,
+  #modal {
+    transition: 0.5s;
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    gap: 20px;
+  
+  }
+  
+  .modal-body p {
+    margin-bottom: 1rem;
+    
+  }
+  
+  #modal.hide,
+  #fade.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  #modal.hide {
+    top: 0;
+  }
+
+  .entradaModal {
+    padding-right: 20px;
+    width:400px;
+    margin-bottom: 5%;
+}
+
+.labelModal {
+    font-size: 20px;
+}
+
+.btnCadastrarModal{
+    margin-top: 15%; 
+    margin-left: 30%; 
+    width: 40%;
+    
+}
+
+.tituloModal {
+    margin-top: 4%;
+    font-size: 50px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#poligons{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

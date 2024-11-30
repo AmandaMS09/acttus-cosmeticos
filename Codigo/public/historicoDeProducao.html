@@ -1,0 +1,418 @@
+<html lang="pt-BR">
+
+<head>
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright" content="© 2023 Acttus Cosméticos" />
+    <meta name="authors"
+        content="Amanda M de Souza, Guilherme D Silva, Luiz Gustavo M Santos, Pedro R Vidigal, Vítor de F Pereira, Vitor N Calhau" />
+    <meta name="description" content="Sistema de controle de produção da empresa Acttus" />
+    <meta name="keywords" content="controle, gerenciamento, cosméticos, produção, produto, cabelo, Acttus" />
+    <!-- Style -->
+    <!-- Bootstrap v4.0 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Main -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/infoFornecedores.css">
+    <link rel="stylesheet" href="css/historicoDeProducao.css">
+    <!-- Script -->
+    <script src="js/main.js" defer></script>
+    <script src="js/cadEmbalagem.js" defer></script>
+    <!-- Bootstrap v4.0 -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"
+        defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"
+        defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"
+        defer></script>
+    <!-- Main -->
+    <script src="js/main.js" defer></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <!-- Título da página -->
+    <title>Histórico - Controle de Produção</title>
+</head>
+
+
+
+<body onload="estaLogado(1), getProducoes()">
+
+    <!-- NAV com barra de pesquisa -->
+    <nav class="navbar navbar-expand-md sticky-top">
+        <!-- Logo -->
+        <img src="https://cdn.vectorstock.com/i/preview-1x/65/30/default-image-icon-missing-picture-page-vector-40546530.jpg"
+            alt="logo" id="logo" class="navbar-brand">
+        <button class="navbar-toggler btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="collapse"
+            data-target="#navegacao" aria-controls="navegacao" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+        </button>
+        <h2 class="mr-4">Histórico de Produção</h2>
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navegacao">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" id="index">Início</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuário</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="permissoes.html">Perfil</a>
+                        <a class="dropdown-item" href="login.html">Login</a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" onclick="logoutUser()">Logout</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="tudo">
+
+        <!-------------------------------------------------------------------------------------------------------------------->
+        <div class="infoProducao">
+            <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+            <label class="escrita-mes" id="em-1">janeiro</label>
+            <div class="mes" id="mes1">
+                <!--colocar informação das produções aqui-->
+            </div>
+            <br>
+
+            <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+            <label class="escrita-mes" id="em-2">fevereiro</label>
+            <div class="mes" id="mes2">
+                <!--colocar informação das produções aqui-->
+                <!--<div>
+                    <label class="escrita-data" id="data">
+                        quarta, 3 de fevereiro
+                    </label>
+
+                    <div class="produto-historico" id="produto-historico">
+                        <div id="nome-do-produto">
+                            <label class="informacao-escrita"> produto meia bomba </label>
+                        </div>
+                        <div id="data-de-producao">
+                            <label class="informacao-escrita"> 10/10/2010 </label>
+                        </div>
+                        <div id="qtd-produzida">
+                            <label class="informacao-base">mililitros: </label>
+                            <label class="informacao-escrita">1000</label>
+                        </div>
+
+                        <button class="botao-de-info" id="btn-de-info">
+                            informações
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="escrita-data" id="data">
+                        quarta, 15 de fevereiro
+                    </label>
+
+                    <div class="produto-historico" id="produto-historico">
+                        <div id="nome-do-produto">
+                            <label class="informacao-escrita"> produto dos crias </label>
+                        </div>
+                        <div id="data-de-producao">
+                            <label class="informacao-escrita"> 10/10/2010 </label>
+                        </div>
+                        <div id="qtd-produzida">
+                            <label class="informacao-base">mililitros: </label>
+                            <label class="informacao-escrita">10000000</label>
+                        </div>
+
+                        <button class="botao-de-info" id="btn-de-info">
+                            informações
+                        </button>
+                    </div>
+                </div>-->
+            </div>
+            <br>
+
+            <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+            <label class="escrita-mes" id="em-3">março</label>
+            <div class="mes" id="mes3">
+                <!--colocar informação das produções aqui-->
+            </div>
+            <br>
+
+            <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+            <label class="escrita-mes" id="em-4">abril</label>
+            <div class="mes" id="mes4">
+                <!--colocar informação das produções aqui-->
+            </div>
+            <br>
+
+            <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   nome do produto    data de produção   mililitragem-->
+
+            <label class="escrita-mes" id="em-5">maio</label>
+            <!--colocar informação das produções aqui-->
+            <div class="mes" id="mes5">
+                <!--<label class="escrita-data" id="data">
+                    quarta, 22 de maio
+                </label>
+                <div class="produto-historico" id="produto-historico">
+
+                    <div id="nome-do-produto">
+                        <label class="informacao-escrita"> produto razoavel </label>
+                    </div>
+                    <div id="data-de-producao">
+                        <label class="informacao-escrita"> 10/10/2010 </label>
+                    </div>
+                    <div id="qtd-produzida">
+                        <label class="informacao-base">mililitros: </label>
+                        <label class="informacao-escrita">muito</label>
+                    </div>
+
+                    <button class="botao-de-info" id="btn-de-info">
+                        informações
+                    </button>
+                </div>-->
+            </div>
+
+            <div>
+            </div>
+            <br>
+
+            <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+            <label class="escrita-mes" id="em-6">junho</label>
+            <div class="mes" id="mes6">
+                <!--colocar informação das produções aqui-->
+            </div>
+            <br>
+
+            <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+            <label class="escrita-mes" id="em-7">julho</label>
+            <div class="mes" id="mes7">
+                <!--colocar informação das produções aqui-->
+            </div>
+            <br>
+
+            <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+            <label class="escrita-mes" id="em-8">agosto</label>
+            <div class="mes" id="mes8">
+                <!--colocar informação das produções aqui-->
+            </div>
+            <br>
+
+            <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+            <label class="escrita-mes" id="em-9">setembro</label>
+            <div class="mes" id="mes9">
+                <!--colocar informação das produções aqui-->
+            </div>
+            <br>
+
+            <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+            <label class="escrita-mes" id="em-10">outubro</label>
+            <div class="mes" id="mes10">
+                <!--colocar informação das produções aqui-->
+            </div>
+            <br>
+
+            <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+            <label class="escrita-mes" id="em-11">novembro</label>
+            <div class="mes" id="mes11">
+                <!--colocar informação das produções aqui-->
+            </div>
+            <br>
+
+            <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+            <label class="escrita-mes" id="em-12">dezembro</label>
+            <div class="mesFoda" id="mes12">
+                <!--colocar informação das produções aqui-->
+            </div>
+            <br>
+
+
+
+
+
+
+
+            <!--<label class="escrita-mes" id="mes">
+                maio
+            </label>
+            <div>
+                <label  class="escrita-data" id="data">
+                    quarta, 22 de maio
+                </label>
+            <table class="produto-historico" id="produto-historico">
+                <thead>
+                <tr>
+
+                    <td class="info-inicio" id="nome-do-produto">produto cabulosissimo</td>
+
+                    <td class="info-mid" id="data-de-producao">10/10/2010</td>
+
+                    <td class="info-mid" id="qtd-produzida">mililitros: 1000</td>
+
+                    <td class="info-final"><button class="botao-de-info" id="btn-de-info">informações</button></td>
+
+                </tr>
+            </thead>
+            </table>
+            
+            </div>-->
+
+
+
+            <!--<label class="escrita-mes" id="mes">
+                maio
+            </label>
+            <div>
+                <label class="escrita-data" id="data">
+                    quarta, 22 de maio
+                </label>
+                <div class="produto-historico" id="produto-historico">
+                    <div id="nome-do-produto">
+                        <label class="informacao-escrita"> CABULOSO </label>
+                    </div>
+                    <div id="data-de-producao">
+                        <label class="informacao-escrita"> 10/10/2010 </label>
+                    </div>
+                    <div id="qtd-produzida">
+                        <label class="informacao-base">mililitros: </label>
+                        <label class="informacao-escrita">sim</label>
+                    </div>
+                    <button class="botao-de-info" id="btn-de-info">
+                        informações
+                    </button>
+                </div>
+            </div>-->
+
+
+        </div>
+
+
+        <!-- MODAL -->
+        <div class="modal fade text-dark" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal_titulo" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-------------------------------------------------------------------------------------------------------------------->
+
+        <div class="enche-buraco">
+
+        </div>
+
+        <aside class="tabela-meses">
+            <div class="titulo-m">
+                <label class="titulo-nm">Mes</label>
+            </div>
+
+            <div class="tm-info"> <!--colocar os onclics que levam a parte da página que tem o mês certo-->
+                <div class="m">
+                    <a class="nm" href="#mes1">Janeiro</a>
+                    <a class="nm" href="#mes2">Fevereiro</a>
+                    <a class="nm" href="#mes3">Março</a>
+                    <a class="nm" href="#mes4">Abril</a>
+                    <a class="nm" href="#mes5">Maio</a>
+                    <a class="nm" href="#mes6">Junho</a>
+                </div>
+                <div class="m">
+                    <a class="nm" href="#mes7">Julho</a>
+                    <a class="nm" href="#mes8">Agosto</a>
+                    <a class="nm" href="#mes9">Setembro</a>
+                    <a class="nm" href="#mes10">Outubro</a>
+                    <a class="nm" href="#mes11">Novembro</a>
+                    <a class="nm" href="#mes12">Dezembro</a>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+
+
+
+
+
+
+
+    <!-- MODAL -->
+    <!--<div class="modal fade text-dark" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal_titulo"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Fornecedor</h3>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                            aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body row p-5 m-0 justify-content-between">
+
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="fade" class="hide"></div>
+    <div id="modal" class="hide">
+
+        <div class="parte-de-cima-modal">
+            <div class="pcm-1">
+                <label class="nome-fornecedor-modal">Nome do fornecedor</label>
+            </div>
+            <div class="pcm-2">
+                <label class="email-fornecedor-modal info-secundaria">Email: emailDoCria@email.com</label>
+                <label class="telefone-fornecedor-modal info-secundaria">Telefone: 99999-9999</label>
+            </div>
+        </div>
+
+        <div class="parte-do-meio-modal">
+
+            <div class="info-fornecedor-modal">
+                <label class="info-fornecedor-modal-1" id="conteudo-vendido">Vende (tantantan): Materia prima
+                    foda</label>
+                <label class="info-fornecedor-modal-2" id="valor-vendido">Valor: R$ (10000)</label>
+            </div>
+            <div class="info-fornecedor-modal">
+                <label class="info-fornecedor-modal-1" id="conteudo-vendido">Vende (tantantan): Materia prima
+                    foda</label>
+                <label class="info-fornecedor-modal-2" id="valor-vendido">Valor: R$ (10000)</label>
+            </div>
+
+            <div id="close-modal"></div>
+        </div>
+
+        <div class="parte-de-baixo-modal">
+            <button class="form-control btn-del btn-letra" id="btn-del-fornecedor">Deletar fornecedor</button>
+            <button class="form-control btn-alt btn-letra" id="btn-alt-fornecedor">Alterar dados</button>
+        </div>
+
+    </div>-->
+
+
+
+
+
+
+
+
+
+    <svg id="poligons" width="463" height="375" viewBox="0 0 463 375" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M120.365 117.539L400.913 196.295L192.434 399.879L120.365 117.539Z" fill="#514B96" fill-opacity="0.5" />
+        <path d="M192.365 174.539L472.913 253.295L264.434 456.879L192.365 174.539Z" fill="#514B96" fill-opacity="0.5" />
+        <path d="M260.365 238.539L540.913 317.295L332.434 520.879L260.365 238.539Z" fill="#514B96" fill-opacity="0.5" />
+    </svg>
+
+
+</body>
+
+</html>

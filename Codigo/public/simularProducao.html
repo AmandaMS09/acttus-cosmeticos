@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright" content="© 2023 Acttus Cosméticos" />
+    <meta name="authors" content="Amanda M de Souza, Guilherme D Silva, Luiz Gustavo M Santos, Pedro R Vidigal, Vítor de F Pereira, Vitor N Calhau" />
+    <meta name="description" content="Sistema de controle de produção da empresa Acttus" />
+    <meta name="keywords" content="controle, gerenciamento, cosméticos, produção, produto, cabelo, Acttus" />
+    <!-- Style -->
+        <!-- Main -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/simularProd.css">
+    <!-- Script -->
+        <!-- Bootstrap v4.0 -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous" defer></script>
+        <!-- Main -->
+        <script src="js/main.js" defer></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <!-- Título da página -->
+    <title>Simular produção - Controle de Produção</title>
+</head>
+
+<body onload="estaLogado(0), listarProdutos(0)">
+
+    <div class="infoSimulacao">
+        <div class="title">
+            <a href="index.html"><h1 id="titulo" class="mb-4"><i class="bi bi-arrow-left-circle mr-4 back" id="back"
+                onclick="history.back()" style="text-decoration: none; color: white;"></a></i>Simular Produção</h1>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalCompras" tabindex="-1" role="dialog" aria-labelledby="modalComprasLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header p-1">
+                <button type="button" class="close mr-2" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body p-0">
+                <iframe src="modalCompras.html" id="meu-iframe" frameborder="0"></iframe>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="divSimulacao" class="divSimulacao">
+
+        <div class="produtoFormula">
+            <div class="blocoProduto">
+                <div class="produto">
+                    <div class="selecaoProduto">
+                        <div class="selectProduto">
+                            <div class="infoProduto">
+                                <label for="selectProduto-0"> Selecione o produto:</label>
+                                <select  onchange="listarFormulas(0), listarEmbalagens(0), listarRotulos(0)" name="selectProduto" id="selectProduto-0" class="form-control campo">
+                                    <option value="Produto">Produto 1</option>
+                                </select>
+                            </div>
+                            <div class="addProduto pt-5 mt-auto mb-auto">
+                                <input type="button" value="+" class="buttonFormulaMais" onclick="adicionarproduto()">
+                            </div>
+                        </div>
+                        <div class="selectProduto">
+                            <div class="infoProduto">
+                                <label for="selectEmbalagem-0"> Tampa a embalagem:</label>
+                                <select  name="selectEmbalagem" id="selectEmbalagem-0" class="form-control campo">
+                                    <option value="0">Selecione a embalagem</option>
+                                    <option value="5">Tampa1</option>
+                                    <option value="6">Tampa2</option>
+                                    <option value="7">Válvula1</option>
+                                    <option value="8">Válvula2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="selectProduto">
+                            <div class="infoProduto">
+                                <label for="selectRotulo-0"> Selecione o Rotulo:</label>
+                                <select  name="selectRotulo" id="selectRotulo-0" class="form-control campo">
+                                    <option value="1">Rotulo1</option>
+                                    <option value="2">Rotulo2</option>
+                                </select>
+                            </div>
+                        </div>
+                    
+
+                    </div>
+                    <div class="quantidade">
+                        <div class="inputQuantidade">
+                            <label for="qtd-0"> Quantidade:</label>
+                            <input id="qtd-0" type="text" class="campo">
+                        </div>
+                        
+
+                    </div>
+                    <div class="simular">
+                        <div class="simular">
+                            <button onclick="preencheTabelaMP()" type="button" class="buttonSimular">Simular</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="blocoFormula">
+                <div class="formula">
+                    <div class="linhaFormula">
+                        <div class="selecaoFormula">
+                            <label for="selectFormula-0"> Selecione a formula:</label>
+                            <select name="selectFormula" id="selectFormula-0" class="form-control campo">
+                                <option value="Formula">Fórmula Principal</option>
+                            </select>
+                        </div>
+                        <div class="addFormula">
+                            <input type="button" value="+" class="buttonFormulaMais">
+                        </div>
+                    </div>
+                    <div class="linhaFormula">
+                        <div class="selecaoFormula">
+                            <label for="selectCima-0"> Corpo da embalagem:</label>
+                            <select name="selectCima" id="selectCima-0" class="form-control campo">
+                                <option value="1">Pote</option>
+                                <option value="2">Frasco</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="linhaFormula">
+                        <div class="selecaoFormula">
+                            <label for="selectCR-0"> Selecione o contra rótulo:</label>
+                            <select name="selectCR" id="selectCR-0" class="form-control campo">
+                                <option value="3">Contra rótulo 1</option>
+                                <option value="4">Contra rótulo 2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="linhaPreco">
+                        <div class="preco">
+                            <label>Preço Total:</label>
+                        </div>
+                    </div>
+                    <div id="listaCompras" class="linhaCompras">
+                        <button onclick="" type="button" class="buttonSimular buttonCompras">Lista de Compras</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="materiaPrima materiaPrima-0">
+            <div class="mpText">
+                <h3>Matérias primas necessárias</h3>
+            </div>
+            <div class="table scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="display: none">Id</th>
+                            <th>Passo</th>
+                            <th>Matéria prima</th>
+                            <th>Composição</th>
+                            <th>Quantidade</th>
+                            <th>Em estoque</th>
+                            <th>CheckBox</th>
+                            
+        
+                        </tr>
+                    </thead>
+                    <tbody class="tabelaMP-0">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="observacoes">
+            <div class="inputObservacoes">
+                <textarea id="w3review" name="w3review" rows="4" cols="50" class="textArea"></textarea>
+            </div>
+            <div class="botoes">
+                <input type="button" value="Imprimir" class="imprimir">
+                <button class="confirmar" onclick="darBaixa()">Confirmar Produção</button>
+            </div>
+    
+        </div>
+    </footer>
+    
+
+    <!--<script>
+        var iframe = document.getElementById('meu-iframe'); 
+      
+        iframe.onload = function() {
+          // Envia mensagem para o iframe
+          iframe.contentWindow.postMessage('Nova mensagem', 'modalCompras.html');
+        };
+      
+        // Evento para receber mensagens do iframe
+        window.addEventListener('message', function(event) {
+          if (event.origin === 'modalCompras.html') {
+            var mensagemRecebida = event.data;
+            console.log('Mensagem recebida do iframe:', mensagemRecebida);
+          }
+        });
+      </script> -->
+
+</body>
+
+</html>

@@ -1,0 +1,236 @@
+<html lang="pt-BR">
+
+<head>
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright" content="© 2023 Acttus Cosméticos" />
+    <meta name="authors"
+        content="Amanda M de Souza, Guilherme D Silva, Luiz Gustavo M Santos, Pedro R Vidigal, Vítor de F Pereira, Vitor N Calhau" />
+    <meta name="description" content="Sistema de controle de produção da empresa Acttus" />
+    <meta name="keywords" content="controle, gerenciamento, cosméticos, produção, produto, cabelo, Acttus" />
+    <!-- Style -->
+    <!-- Bootstrap v4.0 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Main -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/infoFornecedores.css">
+    <!-- Script -->
+    <script src="js/main.js" defer></script>
+    <script src="js/cadEmbalagem.js" defer></script>
+    <!-- Bootstrap v4.0 -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"
+        defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"
+        defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"
+        defer></script>
+    <!-- Main -->
+    <script src="js/main.js" defer></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <!-- Título da página -->
+    <title>Fornecedores - Controle de Produção</title>
+</head>
+
+
+
+<body onload="estaLogado(0), acharFornecedores() , verificarEstoque()">
+
+    <!-- NAV com barra de pesquisa -->
+    <nav class="navbar navbar-expand-md sticky-top">
+        <!-- Logo -->
+        <img src="https://cdn.vectorstock.com/i/preview-1x/65/30/default-image-icon-missing-picture-page-vector-40546530.jpg" alt="logo" id="logo" class="navbar-brand">
+        <button class="navbar-toggler btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="collapse" data-target="#navegacao" aria-controls="navegacao" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+        </button>
+        <h2 class="mr-4">Fornecedores</h2>
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navegacao">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" id="index">Início</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a id="open-modal" class="nav-link" href="" id="cadFornecedor">Novo fornecedor</a>
+                </li> -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Listas</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="infoProduto.html">Produtos</a>
+                        <a class="dropdown-item" href="infoMateriaPrima.html">Matérias Primas</a>
+                        <a class="dropdown-item" href="infoRotulos.html">Rótulos</a>
+                        <a class="dropdown-item" href="infoEmbalagem.html">Embalagens</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuário</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="permissoes.html">Perfil</a>
+                        <a class="dropdown-item" href="login.html">Login</a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" onclick="logoutUser()">Logout</button>
+                    </div>
+                </li>
+            </ul>
+            <!-- Pesquisa -->
+            <form class="form-inline my-2 my-lg-0 m-2">
+                <input class="form-control mr-sm-2 campo" id="pesquisa" type="search" placeholder="Pesquisar" aria-label="Pesquisar" onkeyup="pesquisar()">
+                <button class="btn btn-outline-light my-2 my-sm-0" id="btnPesquisar" type="submit"><i class="bi bi-search" onclick="pesquisar()"></i></button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- MODAL -->
+    <div class="modal fade text-dark" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal_titulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Fornecedor</h3>
+                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body row p-5 m-0 justify-content-between">
+                    
+                </div>
+                <div class="modal-footer">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="div-mae">
+        <div class="cards row p-0 m-0" id="cards-html">
+            <!--<div class="card col-3 p-4"  >
+                <div class="cabecalho-card">
+                    <label class="nome-fornecedor titulo-card" id="fornecedor-nome">Nome do Fornecedor</label>
+                    <label class="email-fornecedor info-secundaria" id="fornecedor-email">Email: emailDoCria@email.com</label>
+                    <label class="telefone-fornecedor info-secundaria" id="fornecedor-tel">Telefone: 99999-9999</label>
+                </div>
+                <div class="info-card" id="info-card">
+                    <label class="info-fornecedor" id="conteudo-vendido">Vende: Materia prima1</label>
+                    <label class="info-fornecedor" id="conteudo-vendido">Vende: Materia prima2</label>
+                    <label class="info-fornecedor" id="conteudo-vendido">Vende: Materia prima3</label>
+                    <label class="info-fornecedor" id="conteudo-vendido">Vende: Materia prima3</label>
+                </div>
+                <div class="btn-card mt-auto">
+                    <button class="form-control infoMais" id="open-modal"><i class="bi bi-plus"></i>Informações</button>-->
+
+            <!------------------------------------------------------------------------------------------------------------------------------------------>
+            <div id="fade" class="hide"></div>
+            <div id="modal" class="hide">
+
+                <div class="parte-de-cima-modal">
+                    <div class="pcm-1">
+                        <label class="nome-fornecedor-modal">Nome do fornecedor</label>
+                    </div>
+                    <div class="pcm-2">
+                        <label class="email-fornecedor-modal info-secundaria">Email: emailDoCria@email.com</label>
+                        <label class="telefone-fornecedor-modal info-secundaria">Telefone: 99999-9999</label>
+                    </div>
+                </div>
+
+                <div class="parte-do-meio-modal">
+
+                    <div class="info-fornecedor-modal">
+                        <label class="info-fornecedor-modal-1" id="conteudo-vendido">Vende (tantantan): Materia prima foda</label>
+                        <label class="info-fornecedor-modal-2" id="valor-vendido">Valor: R$ (10000)</label>
+                    </div>
+                    <div class="info-fornecedor-modal">
+                        <label class="info-fornecedor-modal-1" id="conteudo-vendido">Vende (tantantan): Materia prima foda</label>
+                        <label class="info-fornecedor-modal-2" id="valor-vendido">Valor: R$ (10000)</label>
+                    </div>
+
+                    <div id="close-modal"></div>
+                </div>
+
+                <div class="parte-de-baixo-modal">
+                    <button class="form-control btn-del btn-letra" id="btn-del-fornecedor">Deletar fornecedor</button>
+                    <button class="form-control btn-alt btn-letra" id="btn-alt-fornecedor">Alterar dados</button>
+                </div>
+                
+            </div>
+            <!------------------------------------------------------------------------------------------------------------------------------------------>
+
+            <div id="xxx" value="1"></div>
+
+        </div>
+    </div>
+
+    <!--<div class="card col-3 p-4">
+                <div class="cabecalho-card">
+                    <label class="nome-fornecedor titulo-card">Nome do Fornecedor</label>
+                    <label class="email-fornecedor info-secundaria">Email: emailDoCria@email.com</label>
+                    <label class="telefone-fornecedor info-secundaria">Telefone: 99999-9999</label>
+                </div>
+                <div class="info-card">
+                    <label class="info-fornecedor">Vende: Materia prima1</label>
+                    <label class="info-fornecedor">Vende: Materia prima2</label>
+                    <label class="info-fornecedor">Vende: Materia prima3</label>
+                    <label class="info-fornecedor">Vende: Materia prima3</label>
+                    <label class="info-fornecedor">Vende: Materia prima3</label>
+                    <label class="info-fornecedor">Vende: Materia prima3</label>
+                </div>
+                <div class="btn-card mt-auto">
+                    <button class="form-control infoMais"><i class="bi bi-plus"></i>Informações</button>
+                </div>
+            </div>
+
+
+            <div class="card col-3 p-4">
+                <div class="cabecalho-card">
+                    <label class="nome-fornecedor titulo-card">Nome do Fornecedor</label>
+                    <label class="email-fornecedor info-secundaria">Email: emailDoCria@email.com</label>
+                    <label class="telefone-fornecedor info-secundaria">Telefone: 99999-9999</label>
+                </div>
+                <div class="info-card">
+                    <label class="info-fornecedor">Vende: Materia prima1</label>
+                    <label class="info-fornecedor">Vende: Materia prima2</label>
+                    <label class="info-fornecedor">Vende: Materia prima3</label>
+                    <label class="info-fornecedor">Vende: Materia prima3</label>
+                    <label class="info-fornecedor">Vende: Materia prima3</label>
+                </div>
+                <div class="btn-card mt-auto">
+                    <button class="form-control infoMais"><i class="bi bi-plus"></i>Informações</button>
+                </div>
+            </div>
+
+            <div class="card col-3 p-4">
+                <div class="cabecalho-card">
+                    <label class="nome-fornecedor titulo-card">Nome do Fornecedor</label>
+                    <label class="email-fornecedor info-secundaria">Email: emailDoCria@email.com</label>
+                    <label class="telefone-fornecedor info-secundaria">Telefone: 99999-9999</label>
+                </div>
+                <div class="info-card">
+                    <label class="info-fornecedor">Vende: Materia prima1</label>
+                    <label class="info-fornecedor">Vende: Materia prima2</label>
+                    <label class="info-fornecedor">Vende: Materia prima3</label>
+                    <label class="info-fornecedor">Vende: Materia prima3</label>
+                    <label class="info-fornecedor">Vende: Materia prima3</label>
+                    <label class="info-fornecedor">Vende: Materia prima3</label>
+                    <label class="info-fornecedor">Vende: Materia prima3</label>
+                    <label class="info-fornecedor">Vende: Materia prima3</label>
+                </div>
+                <div class="btn-card mt-auto">
+                    <button class="form-control infoMais"><i class="bi bi-plus"></i>Informações</button>
+                </div>
+            </div>-->
+    </div>
+    </div>
+
+    <svg id="poligons" width="463" height="375" viewBox="0 0 463 375" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M120.365 117.539L400.913 196.295L192.434 399.879L120.365 117.539Z" fill="#514B96" fill-opacity="0.5" />
+        <path d="M192.365 174.539L472.913 253.295L264.434 456.879L192.365 174.539Z" fill="#514B96" fill-opacity="0.5" />
+        <path d="M260.365 238.539L540.913 317.295L332.434 520.879L260.365 238.539Z" fill="#514B96" fill-opacity="0.5" />
+    </svg>
+
+
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright" content="© 2023 Acttus Cosméticos" />
+    <meta name="authors" content="Amanda M de Souza, Guilherme Drumond Silva, Luiz Gustavo M Santos, Pedro R Vidigal, Vítor de F Pereira, Vitor N Calhau" />
+    <meta name="description" content="Sistema de controle de produção da empresa Acttus" />
+    <meta name="keywords" content="controle, gerenciamento, cosméticos, produção, produto, cabelo, Acttus" />
+    <!-- Style -->
+        <!-- Bootstrap v4.0 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- Main -->
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/cadRotulo.css">
+    <!-- Script -->
+        <!-- Bootstrap v4.0 -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous" defer></script>
+        <!-- Main -->
+        <script src="js/main.js" defer></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <!-- Título da página -->
+    <title>Novo Rótulo - Controle de Produção</title>
+</head>
+
+<body>
+    <form class="p-3 row">
+        <h1 id="titulo" class="col-md-12 mb-4"><a href="index.html"><i class="bi bi-arrow-left-circle mr-4" id="back" onclick="history.back()" style="text-decoration: none; color: white;"></i></a></i>Cadastrar Rótulo</h1>
+        <div class="col-md-7  pl-4 pr-4 pt-4">
+            <label for="nome">Nome do rótulo:</label>
+            <input type="text" class="form-control campo" id="nome">
+        </div>
+
+        <div class="col-md-2  pl-4 pr-4 pt-4">
+            <label for="estoque">Estoque atual:</label>
+            <input type="text" class="form-control campo" id="estoque">
+        </div>
+
+        <div class="col-md-3  pl-4 pr-4 pt-4">
+            <label for="minimo">Estoque mínimo:</label>
+            <input type="text" class="form-control campo" id="minimo">
+        </div>
+        
+        <div id="divFornecedor" class="col-md-7 pl-4 pr-4 pt-4">
+            <label>Novo Fornecedor:</label>
+            <button class="add form-control mb-3" onclick="adicionaFornecedor(event)">+ Adicionar Fornecedor</button>
+            <div id="fornecedores" class="row m-0 pb-4">
+                
+            </div>
+        </div>
+        <div class="col-md-5 p-0 m-0">
+            <div class="row m-5">
+              <label>Principal</label>
+              <label class="switch ml-5">
+                  <input id="principal" type="checkbox" checked data-toggle="toggle" data-onstyle="primary" data-offstyle="secondary" data-on="Principal" data-off="Secundario">
+                  <!--<input type="checkbox" id= "s1" class= "lg" value=true>-->
+                  <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="row m-5">
+              <label>Rótulo</label>
+              <label class="switch ml-5 mr-5">
+                  <input id="tipo" type="checkbox" checked data-toggle="toggle" data-onstyle="primary" data-offstyle="secondary" data-on="Rotulo" data-off="ContraRotulo">
+                  <!--<input type="checkbox" id= "s1" class= "lg" value=true>-->
+                  <span class="slider round"></span>
+              </label>
+              <label>Contra Rótulo</label>
+            </div>
+            <div class="col-md-11 ml-auto mr-auto mt-4">
+                <button class="form-control mb-2 mt-2" onclick="guardaRotulo(event)">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+    
+</body>
+</html>

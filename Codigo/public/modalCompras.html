@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright" content="© 2023 Acttus Cosméticos" />
+    <meta name="authors" content="Amanda M de Souza, Guilherme D Silva, Luiz Gustavo M Santos, Pedro R Vidigal, Vítor de F Pereira, Vitor N Calhau" />
+    <meta name="description" content="Sistema de controle de produção da empresa Acttus" />
+    <meta name="keywords" content="controle, gerenciamento, cosméticos, produção, produto, cabelo, Acttus" />
+    <!-- Style -->
+        <!-- Bootstrap v4.0 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- Main -->
+        <link rel="stylesheet" href="css/main.css">
+    <!-- Script -->
+        <!-- Bootstrap v4.0 -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous" defer></script>
+        <!-- Main -->
+        <script src="js/main.js" defer></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <!-- Título da página -->
+    <title>Lista de compras - Controle de Produção</title>
+</head>
+
+<body class="justify-content-start bgClaro" onload="preencheModalCompras()" id="meu-iframe">
+
+    <h1 class="m-3" onclick="">Lista de compras</h1>   
+    <div class="p-5 w-100 conteudo" id="listaComp">
+
+       
+
+        <div class="item pt-4 pb-4">
+            <div class="row m-0 insumoCompras">
+                <label class="col MP-nome m-0">Matéria Prima 1</label>
+                <label class="col MP-quantidade m-0">Quantidade: 1</label>
+                <label class="col-12">Fornecedores:</label>
+            </div>
+            <div class="row m-0 pl-2 fornecedorCompras">
+                <span class="col MP-fornecedor m-0">Fornecedor 1</span>
+                <span class="col MP-preco m-0">R$10.00</span>
+                <span class="col MP-telefone m-0">Telefone: 988889999</span>
+                <span class="col MP-email m-0">fornecedor1@gmail.com</span>
+            </div>
+            <div class="row m-0 pl-2 fornecedorCompras">
+                <span class="col MP-fornecedor m-0">Fornecedor 2</span>
+                <span class="col MP-preco m-0">R$15.00</span>
+                <span class="col MP-telefone m-0">Telefone: 977779999</span>
+                <span class="col MP-email m-0">fornecedor2@gmail.com</span>
+            </div>
+        </div>
+        
+        <div class="item pt-4 pb-4">
+            <div class="row m-0 insumoCompras">
+                <label class="col MP-nome m-0">Matéria Prima 2</label>
+                <label class="col MP-quantidade m-0">Quantidade: 1</label>
+                <label class="col-12">Fornecedores:</label>
+            </div>
+            <div class="row m-0 pl-2 fornecedorCompras">
+                <span class="col MP-fornecedor m-0">Fornecedor 1</span>
+                <span class="col MP-preco m-0">R$10.00</span>
+                <span class="col MP-telefone m-0">Telefone: 988889999</span>
+                <span class="col MP-email m-0">fornecedor1@gmail.com</span>
+            </div>
+            <div class="row m-0 pl-2 fornecedorCompras">
+                <span class="col MP-fornecedor m-0">Fornecedor 2</span>
+                <span class="col MP-preco m-0">R$15.00</span>
+                <span class="col MP-telefone m-0">Telefone: 977779999</span>
+                <span class="col MP-email m-0">fornecedor2@gmail.com</span>
+            </div>
+        </div>
+        
+        <div class="item pt-4 pb-4">
+            <div class="row m-0 insumoCompras">
+                <label class="col MP-nome m-0">Matéria Prima 3</label>
+                <label class="col MP-quantidade m-0">Quantidade: 1</label>
+                <label class="col-12">Fornecedores:</label>
+            </div>
+            <div class="row m-0 pl-2 fornecedorCompras">
+                <span class="col MP-fornecedor m-0">Fornecedor 1</span>
+                <span class="col MP-preco m-0">R$10.00</span>
+                <span class="col MP-telefone m-0">Telefone: 988889999</span>
+                <span class="col MP-email m-0">fornecedor1@gmail.com</span>
+            </div>
+            <div class="row m-0 pl-2 fornecedorCompras">
+                <span class="col MP-fornecedor m-0">Fornecedor 2</span>
+                <span class="col MP-preco m-0">R$15.00</span>
+                <span class="col MP-telefone m-0">Telefone: 977779999</span>
+                <span class="col MP-email m-0">fornecedor2@gmail.com</span>
+            </div>
+        </div>
+        
+        <div class="item pt-4 pb-4">
+            <div class="row m-0 insumoCompras">
+                <label class="col MP-nome m-0">Matéria Prima 4</label>
+                <label class="col MP-quantidade m-0">Quantidade: 1</label>
+                <label class="col-12">Fornecedores:</label>
+            </div>
+            <div class="row m-0 pl-2 fornecedorCompras">
+                <span class="col MP-fornecedor m-0">Fornecedor 1</span>
+                <span class="col MP-preco m-0">R$10.00</span>
+                <span class="col MP-telefone m-0">Telefone: 988889999</span>
+                <span class="col MP-email m-0">fornecedor1@gmail.com</span>
+            </div>
+            <div class="row m-0 pl-2 fornecedorCompras">
+                <span class="col MP-fornecedor m-0">Fornecedor 2</span>
+                <span class="col MP-preco m-0">R$15.00</span>
+                <span class="col MP-telefone m-0">Telefone: 977779999</span>
+                <span class="col MP-email m-0">fornecedor2@gmail.com</span>
+            </div>
+        </div>
+    </div>
+    
+    <!--<script>
+        // Evento para receber mensagens do documento pai
+        window.addEventListener('message', function(event) {
+          if (event.origin === 'simularProducao.html') {
+            var mensagemRecebida = event.data;
+            console.log('Mensagem recebida do documento pai:', mensagemRecebida);
+      
+            // Realizar manipulações no conteúdo do iframe conforme necessário
+            // ...
+      
+            // Enviar mensagem de volta para o documento pai
+            window.parent.postMessage('Resposta do iframe', 'simularProducao.html');
+          }
+        });
+      </script>-->
+
+</body>
+
+</html>

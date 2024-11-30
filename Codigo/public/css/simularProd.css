@@ -1,0 +1,384 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    
+    min-width: 100%;
+    color: #CCC;
+    
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.8rem;
+    margin-top: 4rem;
+}
+
+
+
+.campo,
+.campo::placeholder,
+.campo:focus {
+    color: #e3e3e3;
+    background-color: #938dda;
+    outline: none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    padding: .4rem;
+    min-width: 25rem;
+    max-width: 25rem;
+    min-height: 1.4rem;
+    border: 0px;
+}
+
+.infoSimulacao {
+    display: flex;
+    justify-content: center;
+}
+
+.selectProduto {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2rem;
+    align-items: flex-end;
+    
+}
+
+.selecaoProduto {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.blocoProduto {
+    max-width: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.blocoFormula {
+    
+    max-width: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.selecaoFormula {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+}
+
+.divSimulacao {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.formula {
+    display: flex;
+    align-items: center;
+    
+    flex-direction: column;
+  
+}
+
+.buttonFormula, .buttonFormulaMais {
+    background-color: transparent;
+    color: #928CD0;
+    width: 100%;
+    
+    border: 2px solid #928CD0;
+    border-radius: 10px;
+    font-size: 25px;
+    justify-content: center;
+    text-align: center;
+}
+
+.buttonFormulaMais {
+    height: 40px;
+    width: 40px;
+}
+
+.buttonFormula {
+    height: 40px;
+    width: 30%;
+}
+
+
+.buttonSimular {
+
+    color: white;
+    font-size: 1.3rem;
+    padding: 0px 30px;
+    height: 40px;
+    background: #514B96;
+    border-radius: 10px;
+    border: 0px;
+    margin-right: 32px;
+}
+
+.simular {
+    display: flex;
+    align-items: flex-end;
+}
+
+.quantidade {
+    display: flex;
+    flex-direction: row;
+}
+
+.inputQuantidade {
+    display: flex;
+    flex-direction: column;
+    margin-right: 2rem;
+}
+
+.simular {
+    margin-top: 20px;
+}
+
+.linhaCompras {
+    display: flex;
+    width: 100%;
+}
+
+.buttonCompras {
+    margin-top: 30px;
+}
+
+
+.linhaFormula {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.linhaPreco {
+    width: 100%;
+    display: flex;
+}
+
+.preco {
+    width: 300px;
+    height: 50px;
+
+    border: 2px solid #928CD0;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 10px;
+    font-size: 1.5rem;
+    display: flex;
+    margin-top: 37px;
+    padding: 4px;
+    
+}
+
+.addFormula {
+    display: flex;
+    align-items: flex-end;
+}
+
+.produtoFormula {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.materiaPrima {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.mpText {
+    margin-bottom: 2rem;
+    width: 100%;
+    color: #CCC;
+    font-size: 25px;
+}
+
+th,
+td {
+    padding: 20px;
+    font-size: 25px;
+}
+
+
+
+
+
+/* Scroll bar */
+
+div.scroll {
+
+
+    height: 220px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+   
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #514B96;
+    border-radius: 10px;
+}
+
+
+.observacoes {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3rem;
+}
+
+.botoes {
+    display: flex;
+    flex-direction: column;
+    margin-left: 3rem;
+    align-items: flex-end;
+    justify-content: space-around;
+}
+
+.textArea {
+
+    width: 800px;
+    height: 145px;
+    border: 2px solid #928CD0;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 10px;
+    background-color: transparent;
+    color: white;
+}
+
+.imprimir {
+
+    width: 150px;
+    height: 50px;
+    border: 2px solid #928CD0;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 10px;
+    background-color: transparent;
+    color: #928CD0;
+    font-size: 23px;
+    align-self: center;
+}
+
+
+.confirmar {
+
+    color: white;
+    font-size: 1.3rem;
+    padding: 10px 30px;
+    background: #514B96;
+    border: 0;
+    border-radius: 10px;
+}
+
+#checkboxSimular {
+    
+    padding: 10px 266px 7px 38px;
+    width: 26px;
+    height: 26px;
+
+    background-color: #514B96;
+}
+
+
+
+.addProduto {
+    margin-left: 1rem;
+    display: flex;
+    padding-top: 10px;
+}
+
+.infoProduto {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+/* Reponsive part */
+
+@media only screen and (max-width: 1100px) {
+
+    .produtoFormula {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .blocoProduto {
+        max-width: 100%;
+    }
+
+    .blocoFormula {
+        max-width: 100%;
+    }
+
+    th,
+    td {
+        padding: 0px;
+        font-size: 8px;
+    }
+
+    .observacoes {
+        display: flex;
+        flex-direction: column;
+        max-width: 400px;
+    }
+
+    .selectProduto {
+        max-width: 400px;
+    }
+
+    .campo {
+        min-width: 18rem;
+    }
+
+    .quantidade {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .buttonSimular {
+        margin-bottom: 30px;
+        margin-top: 30px;
+    }
+
+    .textArea {
+
+        max-width: 350px;
+        height: 145px;
+        border: 2px solid #928CD0;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        border-radius: 10px;
+        background-color: transparent;
+        color: white;
+    }
+
+   
+}
