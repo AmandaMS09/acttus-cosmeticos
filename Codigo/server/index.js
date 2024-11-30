@@ -27,6 +27,7 @@ import { listarRotulo, updateRotulo, deleteRotulo, cadastrarRotulo, selectRotulo
 import { cadastraEmbalagem, selectEmbalagem, deleteEmbalagem, updateEmbalagem, listarEmbalagens, listarEmbalagem, baixaEmbalagem, listarEmbalagemMin, listarEmbalagemMod } from "./controllers/embalagem.js"
 import { cadastrarFormula, selectFormula, deleteFormula, listarFormulas, listarFormulasId } from "./controllers/formula.js";
 import { cadastrarProduto, produtoHasEmbalagem, deletePHasE, listarProdutos, deleteProduto, updateProduto } from "./controllers/produto.js";
+import { cadastrarRotuloHasFornecedor, cadastraFornecedorHasEmbalagem, selectFornecedores, cadastraFornecedor, updateFornecedor, deleteFornecedor, listarFornecedoresE, listarFornecedoresRotulo, deleteFornecedorRotulo, deleteFornecedorE, deleteFRelacaoMP, deleteFRelacaoE, deleteFRelacaoR, listarFornecedorMateriaPrimaMin, listarFornecedorRotuloMin } from "./controllers/fornecedor.js";
 
 /* ROUTES */
 app.get("/", function (res) {
@@ -81,6 +82,22 @@ app.post("/deletePHasE", deletePHasE)
 app.get("/listarProdutos", listarProdutos)
 app.post("/deleteProduto", deleteProduto)
 app.post("/updateProduto", updateProduto)
+app.post("/cadastrarRotuloHasFornecedor", cadastrarRotuloHasFornecedor)
+app.post("/cadastraFornecedorHasEmbalagem", cadastraFornecedorHasEmbalagem)
+app.post("/selectFornecedores", selectFornecedores)
+app.get("/selectFornecedores", selectFornecedores)
+app.post("/cadastraFornecedor", cadastraFornecedor)
+app.post("/updateFornecedor", updateFornecedor)
+app.post("/deleteFornecedor", deleteFornecedor)
+app.post("/listarFornecedoresE", listarFornecedoresE)
+app.post("/listarFornecedoresRotulo", listarFornecedoresRotulo)
+app.post("/deleteFornecedorRotulo", deleteFornecedorRotulo)
+app.post("/deleteFornecedorE", deleteFornecedorE)
+app.post("/deleteFRelacaoMP", deleteFRelacaoMP)
+app.post("/deleteFRelacaoE", deleteFRelacaoE)
+app.post("/deleteFRelacaoR", deleteFRelacaoR)
+app.post("/listarFornecedorMateriaPrimaMin", listarFornecedorMateriaPrimaMin)
+app.post("/listarFornecedorRotuloMin", listarFornecedorRotuloMin)
 
 /* SERVER CONFIG */
 const PORT = 3303
