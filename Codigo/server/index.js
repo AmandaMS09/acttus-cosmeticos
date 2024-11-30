@@ -22,13 +22,15 @@ const __dirname = path.dirname(__filename)
 /* Local imports */
 import { cadastro, login, listaUsuarios, usuarioEspecifico, deletarUsuario, alterarNomeUsuario, alterarEmailUsuario, alterarPermissaoUsuario } from "./controllers/usuario.js"
 import { selectOrigem, getIdOrigem } from "./controllers/origem.js";
-import { cadastraMateriaPrima, listarMateriaPrima, updateMateriaPrima, preencheTabelaMP, listarMateriaPrimaMin, listarMateriaPrimaMod, getMP, filtrarMateriaPrima } from "./controllers/materia-prima.js";
-import { listarRotulo, updateRotulo, deleteRotulo, cadastrarRotulo, selectRotulo, listarRotulos} from "./controllers/rotulo.js"
+import { cadastraMateriaPrima, listarMateriaPrima, updateMateriaPrima, deleteMateriaPrima, selectMateriasPrimas, baixaMateriaPrima, verificarEstoque, preencheTabelaMP, listarMateriaPrimaMin, listarMateriaPrimaMod, getMP, filtrarMateriaPrima } from "./controllers/materia-prima.js";
+import { listarRotulo, updateRotulo, deleteRotulo, cadastrarRotulo, selectRotulo, listarRotulos } from "./controllers/rotulo.js"
+import { cadastraEmbalagem, selectEmbalagem, deleteEmbalagem, updateEmbalagem, listarEmbalagens, listarEmbalagem, baixaEmbalagem, listarEmbalagemMin, listarEmbalagemMod } from "./controllers/embalagem.js"
 
 /* ROUTES */
 app.get("/", function (res) {
     res.sendFile("landing.html", { root: __dirname })
 })
+
 app.post("/cadastro", cadastro)
 app.post("/login", login)
 app.get("/selectOrigem", selectOrigem)
@@ -42,6 +44,10 @@ app.post("/deletarUsuario", deletarUsuario)
 app.post("/alterarNomeUsuario", alterarNomeUsuario)
 app.post("/alterarEmailUsuario", alterarEmailUsuario)
 app.post("/alterarPermissaoUsuario", alterarPermissaoUsuario)
+app.post("/deleteMateriaPrima", deleteMateriaPrima)
+app.post("/selectMateriasPrimas", selectMateriasPrimas)
+app.post("/baixaMateriaPrima", baixaMateriaPrima)
+app.post("/verificarEstoque", verificarEstoque)
 app.post("/preencheTabelaMP", preencheTabelaMP)
 app.post("/listarMateriaPrimaMin", listarMateriaPrimaMin)
 app.post("/listarMateriaPrimaMod", listarMateriaPrimaMod)
@@ -53,6 +59,15 @@ app.post("/deleteRotulo", deleteRotulo)
 app.post("/cadastrarRotulo", cadastrarRotulo)
 app.get("/selectRotulo", selectRotulo)
 app.post("/listarRotulos", listarRotulos)
+app.post("/cadastraEmbalagem", cadastraEmbalagem)
+app.get("/selectEmbalagem", selectEmbalagem)
+app.post("/deleteEmbalagem", deleteEmbalagem)
+app.post("/updateEmbalagem", updateEmbalagem)
+app.post("/listarEmbalagens", listarEmbalagens)
+app.post("/listarEmbalagem", listarEmbalagem)
+app.post("/baixaEmbalagem", baixaEmbalagem)
+app.post("/listarEmbalagemMin", listarEmbalagemMin)
+app.post("/listarEmbalagemMod", listarEmbalagemMod)
 
 /* SERVER CONFIG */
 const PORT = 3303

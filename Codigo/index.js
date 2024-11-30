@@ -1387,12 +1387,39 @@ app.post("/listarFormulas", function (req, res) {
 });
 
 app.post("/listarEmbalagens", function (req, res) {
-  let restricao = ""
-  if (req.body.restricao)
-    restricao = req.body.restricao;
-  var embalagens = []
+  let produto_id = req.body.produto_id;
+    var embalagens = []
+    if (produto_id) {
+    connection.query(
+        `select * from embalagem e left join produto_has_embalagem pe on pe.embalagem_id = e.id and produto_id = ${produto_id}`,
+        (err, rows, fields) => {
+    
+          if (err) {
+            return res.json({
+              tipo: "Erro ao retornar dados dos embalagens",
+              mensagem: err,
+            });
+          }
+          for (let cont = 0; cont < rows.length; cont++) {
+            embalagens.push({
+              id: rows[cont].id,
+              nome: rows[cont].nome,
+              tipo: rows[cont].tipo,
+              tamanho: rows[cont].mililitragem,
+              estoque: rows[cont].estoque,
+              minimo: rows[cont].minimo,
+              produto_id: rows[cont].produto_id,
+              ePrincipal: rows[cont].ePrincipal
+            })
+          }
+          return res.json({
+            embalagens: embalagens
+          });
+        }
+      );
+    }
   connection.query(
-    `select * from embalagem e left join produto_has_embalagem pe on pe.embalagem_id = e.id ${restricao}`,
+    `select * from embalagem e left join produto_has_embalagem pe on pe.embalagem_id = e.id`,
     (err, rows, fields) => {
 
       if (err) {
