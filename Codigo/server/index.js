@@ -20,8 +20,9 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 /* Local imports */
-import { cadastro, login } from "./controllers/autenticacao.js"
+import { cadastro, login, listaUsuarios, usuarioEspecifico, deletarUsuario, alterarNomeUsuario, alterarEmailUsuario, alterarPermissaoUsuario } from "./controllers/usuario.js"
 import { selectOrigem, getIdOrigem } from "./controllers/origem.js";
+import { cadastraMateriaPrima, listarMateriaPrima, updateMateriaPrima } from "./controllers/materia-prima.js";
 
 /* ROUTES */
 app.get("/", function (res) {
@@ -30,7 +31,16 @@ app.get("/", function (res) {
 app.post("/cadastro", cadastro)
 app.post("/login", login)
 app.get("/selectOrigem", selectOrigem)
-app.post("/getIdOrigem", getIdOrigem)
+app.get("/getIdOrigem", getIdOrigem)
+app.post("/cadastraMateriaPrima", cadastraMateriaPrima)
+app.post("/listarMateriaPrima", listarMateriaPrima)
+app.post("/updateMateriaPrima", updateMateriaPrima)
+app.post("/listaUsuarios", listaUsuarios)
+app.post("/usuarioEspecifico", usuarioEspecifico)
+app.post("/deletarUsuario", deletarUsuario)
+app.post("/alterarNomeUsuario", alterarNomeUsuario)
+app.post("/alterarEmailUsuario", alterarEmailUsuario)
+app.post("/alterarPermissaoUsuario", alterarPermissaoUsuario)
 
 /* SERVER CONFIG */
 const PORT = 3303
