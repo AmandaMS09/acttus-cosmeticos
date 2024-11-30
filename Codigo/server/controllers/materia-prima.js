@@ -139,7 +139,7 @@ export const deleteMateriaPrima = async (req, res) => {
     try {
         const { id } = req.body;
 
-        const { error } = await db.from('materiaPrima').delete().eq('id', id);
+        const { error } = await db.from('materiaprima').delete().eq('id', id);
 
         if (error) {
             return res.json({
@@ -162,7 +162,7 @@ export const deleteMateriaPrima = async (req, res) => {
 
 export const selectMateriasPrimas = async (req, res) => {
     try {
-        const { data, error } = await db.from('materiaPrima').select();
+        const { data, error } = await db.from('materiaprima').select();
 
         if (error) {
             return res.json({
@@ -189,7 +189,7 @@ export const baixaMateriaPrima = async (req, res) => {
     try {
         const { quant, id } = req.body;
 
-        const { error } = await db.from('materiaPrima').update({ estoque: db.raw(`estoque - ${quant}`) }).eq('id', id);
+        const { error } = await db.from('materiaprima').update({ estoque: db.raw(`estoque - ${quant}`) }).eq('id', id);
 
         if (error) {
             return res.json({
@@ -214,7 +214,7 @@ export const verificarEstoque = async (req, res) => {
     try {
         const { id } = req.body;
 
-        const { data, error } = await db.from('materiaPrima').select('estoque', 'minimo').eq('id', id);
+        const { data, error } = await db.from('materiaprima').select('estoque', 'minimo').eq('id', id);
 
         if (error || !data[0]) {
             return res.json({
@@ -227,6 +227,134 @@ export const verificarEstoque = async (req, res) => {
             estoque: data[0].estoque,
             minimo: data[0].minimo,
         }]));
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// PREENCHE TABELA MP
+export const preencheTabelaMP = async (req, res) => {
+    try {
+        const { formula } = req.body;
+
+        const { data, error } = await db.raw(`SELECT materiaPrima.id, materiaPrima.nome, materiaPrima.estoque, formula_has_materiaPrima.porcentagem, formula_has_materiaPrima.passo from formula_has_materiaPrima join materiaPrima on formula_has_materiaPrima.formula_id = ${formula} and formula_has_materiaPrima.materiaPrima_id = materiaPrima.id`);
+
+        if (error) {
+            return res.json({
+                tipo: "Erro",
+                mensagem: error,
+            });
+        }
+
+        return res.json({
+            mP: data
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// LISTAR MATERIA PRIMA MIN
+export const listarMateriaPrimaMin = async (req, res) => {
+    try {
+        const { data, error } = await db.from('materiaprima').select().lt('estoque', 'minimo');
+
+        if (error) {
+            return res.json({
+                tipo: "Erro ao retornar dados das materias primas",
+                mensagem: error,
+            });
+        }
+
+        return res.json({
+            lista: data
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// LISTAR MATERIA PRIMA MOD
+export const listarMateriaPrimaMod = async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        const { data, error } = await db.from('materiaprima').select().eq('id', id);
+
+        if (error) {
+            return res.json({
+                tipo: "Erro ao retornar dados das materias primas",
+                mensagem: error,
+            });
+        }
+
+        return res.json({
+            lista: data
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// GET MP
+export const getMP = async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        const { data, error } = await db.raw(`SELECT mP.id, mP.nome, mP.estoque, mPhF.materiaPrima_id, mPhF.fornecedor_id, mPhf.preco, f.id as fornecedorID, f.nome as fornecedorNome, f.email, f.telefone FROM materiaPrima mP JOIN materiaPrima_has_fornecedor mPhF ON mP.id = mPhF.materiaPrima_id JOIN fornecedor f ON f.id = mPhF.fornecedor_id WHERE mP.id = ${id}`);
+
+        if (error) {
+            return res.json({
+                tipo: "Erro ao retornar dados das materias primas",
+                mensagem: error,
+            });
+        }
+
+        return res.json({
+            mP: data
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// FILTRAR MATERIA PRIMA
+export const filtrarMateriaPrima = async (req, res) => {
+    try {
+        const { origem } = req.body;
+
+        const { data, error } = await db.from('materiaprima').select().eq('origem_id', origem);
+
+        if (error) {
+            return res.json({
+                tipo: "Erro ao retornar dados das Materias Primas",
+                mensagem: error,
+            });
+        }
+
+        return res.json({
+            materiaPrima: data
+        });
+
     } catch (err) {
         res.json({
             tipo: "Erro",

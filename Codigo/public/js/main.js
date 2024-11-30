@@ -278,7 +278,7 @@ async function getProdutoR(id_produto) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            restricao: `where produto_id = ${id_produto}`,
+            produto_id: id_produto,
         })
     })
     var data = await response.json()

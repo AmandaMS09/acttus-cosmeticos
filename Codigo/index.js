@@ -1420,38 +1420,35 @@ app.post("/listarEmbalagens", function (req, res) {
   );
 });
 
-app.post("/listarRotulos", function (req, res) {
-  let restricao = ""
-  if (req.body.restricao)
-    restricao = req.body.restricao;
-  var rotulos = []
-  connection.query(
-    `select * from rotulo ${restricao};`,
-    (err, rows, fields) => {
+// app.post("/listarRotulos", function (req, res) {
+//   var rotulos = []
+//   connection.query(
+//     `select * from rotulo where produto_id = ${req.body.produto_id};`,
+//     (err, rows, fields) => {
 
-      if (err) {
-        return res.json({
-          tipo: "Erro ao retornar dados dos rotulos",
-          mensagem: err,
-        });
-      }
-      for (let cont = 0; cont < rows.length; cont++) {
-        rotulos.push({
-          id: rows[cont].id,
-          nome: rows[cont].nome,
-          tipo: rows[cont].tipo,
-          produto_id: rows[cont].produto_id,
-          estoque: rows[cont].estoque,
-          minimo: rows[cont].minimo,
-          principal: rows[cont].principal
-        })
-      }
-      return res.json({
-        rotulos: rotulos
-      });
-    }
-  );
-});
+//       if (err) {
+//         return res.json({
+//           tipo: "Erro ao retornar dados dos rotulos",
+//           mensagem: err,
+//         });
+//       }
+//       for (let cont = 0; cont < rows.length; cont++) {
+//         rotulos.push({
+//           id: rows[cont].id,
+//           nome: rows[cont].nome,
+//           tipo: rows[cont].tipo,
+//           produto_id: rows[cont].produto_id,
+//           estoque: rows[cont].estoque,
+//           minimo: rows[cont].minimo,
+//           principal: rows[cont].principal
+//         })
+//       }
+//       return res.json({
+//         rotulos: rotulos
+//       });
+//     }
+//   );
+// });
 
 
 
@@ -1525,13 +1522,9 @@ app.post("/listarEmbalagem", function (req, res) {
 });
 //=======================================================================================//
 app.post("/listarRotulos", function (req, res) {
-  let restricao = ""
-  if (req.body.restricao)
-    restricao = req.body.restricao;
-
   var infoFornR = []
   connection.query(
-    `select * from rotulo mte left join rotulo_has_fornecedor mtf on mtf.rotulo_id = mte.id ${restricao};`,
+    `select * from rotulo mte left join rotulo_has_fornecedor mtf on mtf.rotulo_id = mte.id where produto_id = ${req.body.produto_id};`,
     (err, rows, fields) => {
 
       if (err) {

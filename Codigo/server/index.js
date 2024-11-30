@@ -22,7 +22,8 @@ const __dirname = path.dirname(__filename)
 /* Local imports */
 import { cadastro, login, listaUsuarios, usuarioEspecifico, deletarUsuario, alterarNomeUsuario, alterarEmailUsuario, alterarPermissaoUsuario } from "./controllers/usuario.js"
 import { selectOrigem, getIdOrigem } from "./controllers/origem.js";
-import { cadastraMateriaPrima, listarMateriaPrima, updateMateriaPrima } from "./controllers/materia-prima.js";
+import { cadastraMateriaPrima, listarMateriaPrima, updateMateriaPrima, preencheTabelaMP, listarMateriaPrimaMin, listarMateriaPrimaMod, getMP, filtrarMateriaPrima } from "./controllers/materia-prima.js";
+import { listarRotulo, updateRotulo, deleteRotulo, cadastrarRotulo, selectRotulo, listarRotulos} from "./controllers/rotulo.js"
 
 /* ROUTES */
 app.get("/", function (res) {
@@ -41,6 +42,17 @@ app.post("/deletarUsuario", deletarUsuario)
 app.post("/alterarNomeUsuario", alterarNomeUsuario)
 app.post("/alterarEmailUsuario", alterarEmailUsuario)
 app.post("/alterarPermissaoUsuario", alterarPermissaoUsuario)
+app.post("/preencheTabelaMP", preencheTabelaMP)
+app.post("/listarMateriaPrimaMin", listarMateriaPrimaMin)
+app.post("/listarMateriaPrimaMod", listarMateriaPrimaMod)
+app.post("/getMP", getMP)
+app.post("/filtrarMateriaPrima", filtrarMateriaPrima)
+app.post("/listarRotulo", listarRotulo)
+app.post("/updateRotulo", updateRotulo)
+app.post("/deleteRotulo", deleteRotulo)
+app.post("/cadastrarRotulo", cadastrarRotulo)
+app.get("/selectRotulo", selectRotulo)
+app.post("/listarRotulos", listarRotulos)
 
 /* SERVER CONFIG */
 const PORT = 3303
