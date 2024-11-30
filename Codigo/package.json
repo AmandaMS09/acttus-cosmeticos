@@ -4,7 +4,7 @@
   "description": "Sistema de controle de produção da empresa Acttus",
   "main": "index.js",
   "scripts": {
-    "test": "Aplicação funcionando",
+    "test": "echo 'Testes ainda não implementados'",
     "start": "nodemon app.js",
     "test:cucumber": "cucumber-js"
   },
@@ -28,9 +28,11 @@
     "mysql2": "^3.11.5",
     "node-fetch": "^2.7.0",
     "nodemon": "^3.1.7",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "rs": "file:"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "^11.1.0"
+    "@cucumber/cucumber": "^11.1.0",
+    "cucumber": "^6.0.7"
   }
 }
