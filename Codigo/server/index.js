@@ -120,7 +120,3 @@ app.post("/listarFornecedorEmbalagemMin", listarFornecedorEmbalagemMin)
 app.post("/baixaRotulo", baixaRotulo)
 app.post("/listarRotuloMin", listarRotuloMin)
 app.post("/listarRotuloMin", listarRotuloMin)
-
-/* SERVER CONFIG */
-const PORT = 3303
-app.listen(PORT, () => console.log(`Server Port ${PORT} running.`))
