@@ -25,6 +25,7 @@ import { selectOrigem, getIdOrigem } from "./controllers/origem.js";
 import { cadastraMateriaPrima, listarMateriaPrima, updateMateriaPrima, deleteMateriaPrima, selectMateriasPrimas, baixaMateriaPrima, verificarEstoque, preencheTabelaMP, listarMateriaPrimaMin, listarMateriaPrimaMod, getMP, filtrarMateriaPrima } from "./controllers/materia-prima.js";
 import { listarRotulo, updateRotulo, deleteRotulo, cadastrarRotulo, selectRotulo, listarRotulos } from "./controllers/rotulo.js"
 import { cadastraEmbalagem, selectEmbalagem, deleteEmbalagem, updateEmbalagem, listarEmbalagens, listarEmbalagem, baixaEmbalagem, listarEmbalagemMin, listarEmbalagemMod } from "./controllers/embalagem.js"
+import { cadastrarFormula, selectFormula, deleteFormula, listarFormulas, listarFormulasId } from "./controllers/formula.js";
 
 /* ROUTES */
 app.get("/", function (res) {
@@ -68,6 +69,11 @@ app.post("/listarEmbalagem", listarEmbalagem)
 app.post("/baixaEmbalagem", baixaEmbalagem)
 app.post("/listarEmbalagemMin", listarEmbalagemMin)
 app.post("/listarEmbalagemMod", listarEmbalagemMod)
+app.post("/cadastrarFormula", cadastrarFormula)
+app.get("/selectFormula", selectFormula)
+app.post("/deleteFormula", deleteFormula)
+app.post("/listarFormulas", listarFormulas)
+app.post("/listarFormulasId", listarFormulasId)
 
 /* SERVER CONFIG */
 const PORT = 3303
