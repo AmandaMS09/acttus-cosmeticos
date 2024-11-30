@@ -28,7 +28,7 @@ jobs:
 
     - name: Build application
       working-directory: Codigo
-      run: npm run build
+      run: npm run app
 
   deploy:
     needs: build-and-test
