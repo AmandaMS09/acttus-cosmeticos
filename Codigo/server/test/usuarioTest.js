@@ -20,3 +20,21 @@ describe('POST /cadastro', () => {
 			});
 	})
 })
+
+describe('POST /login', () => {
+	it('', (done) => {
+		const newLogin = {
+			email: "js@gmail.com",
+			senha: "javaScript>>>Java"
+		}
+
+		request(app)
+			.post('/login')
+			.send(newLogin)
+			.end((err, res) => {
+				if (err) return done(err);
+				assert.strictEqual(res.body.message, "Bem vindo de volta, O JavaScript");
+				done();
+			});
+	}
+})
