@@ -26,6 +26,7 @@ import { cadastraMateriaPrima, listarMateriaPrima, updateMateriaPrima, deleteMat
 import { listarRotulo, updateRotulo, deleteRotulo, cadastrarRotulo, selectRotulo, listarRotulos } from "./controllers/rotulo.js"
 import { cadastraEmbalagem, selectEmbalagem, deleteEmbalagem, updateEmbalagem, listarEmbalagens, listarEmbalagem, baixaEmbalagem, listarEmbalagemMin, listarEmbalagemMod } from "./controllers/embalagem.js"
 import { cadastrarFormula, selectFormula, deleteFormula, listarFormulas, listarFormulasId } from "./controllers/formula.js";
+import { cadastrarProduto, produtoHasEmbalagem, deletePHasE, listarProdutos, deleteProduto, updateProduto } from "./controllers/produto.js";
 
 /* ROUTES */
 app.get("/", function (res) {
@@ -74,6 +75,12 @@ app.get("/selectFormula", selectFormula)
 app.post("/deleteFormula", deleteFormula)
 app.post("/listarFormulas", listarFormulas)
 app.post("/listarFormulasId", listarFormulasId)
+app.post("/cadastrarProduto", cadastrarProduto)
+app.post("/produtoHasEmbalagem", produtoHasEmbalagem)
+app.post("/deletePHasE", deletePHasE)
+app.get("/listarProdutos", listarProdutos)
+app.post("/deleteProduto", deleteProduto)
+app.post("/updateProduto", updateProduto)
 
 /* SERVER CONFIG */
 const PORT = 3303
