@@ -182,11 +182,11 @@ export const listarFornecedoresE = async (req, res) => {
         }
 
         let formattedData = []
-        
-        data.forEach(function(embalagemData) {
+
+        data.forEach(function (embalagemData) {
             const fornecedor = embalagemData.fornecedor
             delete embalagemData.fornecedor
-            formattedData.push({...embalagemData, ...fornecedor})
+            formattedData.push({ ...embalagemData, ...fornecedor })
         })
 
         return res.json({
@@ -216,11 +216,11 @@ export const listarFornecedoresRotulo = async (req, res) => {
         }
 
         let formattedData = []
-        
-        data.forEach(function(rotuloData) {
+
+        data.forEach(function (rotuloData) {
             const fornecedor = rotuloData.fornecedor
             delete rotuloData.fornecedor
-            formattedData.push({...rotuloData, ...fornecedor})
+            formattedData.push({ ...rotuloData, ...fornecedor })
         })
 
         return res.json({
@@ -239,144 +239,144 @@ export const listarFornecedoresRotulo = async (req, res) => {
 export const deleteFornecedorRotulo = async (req, res) => {
     try {
         const { f_id, r_id } = req.body;
-    
+
         const { error } = await db.from('rotulo_has_fornecedor').delete().eq('fornecedor_id', f_id).eq('rotulo_id', r_id);
-    
+
         if (error) {
             return res.json({
                 tipo: "Erro ao remover fornecedor da rotulo",
                 mensagem: error,
             });
         }
-    
+
         return res.json({
             tipo: "Remover Fornecedor",
             mensagem: `Fornecedor removido com sucesso!`,
         });
-    
+
     } catch (err) {
         res.json({
             tipo: "Erro",
             mensagem: err,
         });
     }
-    };
-    
-    // DELETE FORNECEDOR E
-    export const deleteFornecedorE = async (req, res) => {
+};
+
+// DELETE FORNECEDOR E
+export const deleteFornecedorE = async (req, res) => {
     try {
         const { f_id, e_id } = req.body;
-    
+
         const { error } = await db.from('embalagem_has_fornecedor').delete().eq('fornecedor_id', f_id).eq('embalagem_id', e_id);
-    
+
         if (error) {
             return res.json({
                 tipo: "Erro ao remover fornecedor da embalagem",
                 mensagem: error,
             });
         }
-    
+
         return res.json({
             tipo: "Remover Fornecedor",
             mensagem: `Fornecedor removido com sucesso!`,
         });
-    
+
     } catch (err) {
         res.json({
             tipo: "Erro",
             mensagem: err,
         });
     }
-    };
-    
-    // DELETE FRELAÇÃO MP
-    export const deleteFRelacaoMP = async (req, res) => {
+};
+
+// DELETE FRELAÇÃO MP
+export const deleteFRelacaoMP = async (req, res) => {
     try {
         const { id } = req.body;
-    
+
         const { error } = await db.from('materiaprima_has_fornecedor').delete().eq('materiaPrima_id', id);
-    
+
         if (error) {
             return res.json({
                 tipo: "Erro ao deletar materia prima",
                 mensagem: error,
             });
         }
-    
+
         return res.json({
             tipo: "Deletar relação com materia prima",
             mensagem: `Relação com materia prima deletada com sucesso!`,
         });
-    
+
     } catch (err) {
         res.json({
             tipo: "Erro",
             mensagem: err,
         });
     }
-    };
-    
-    // DELETE FRELAÇÃO E
-    export const deleteFRelacaoE = async (req, res) => {
+};
+
+// DELETE FRELAÇÃO E
+export const deleteFRelacaoE = async (req, res) => {
     try {
         const { id } = req.body;
-    
+
         const { error } = await db.from('embalagem_has_fornecedor').delete().eq('embalagem_id', id);
-    
+
         if (error) {
             return res.json({
                 tipo: "Erro ao deletar embalagem",
                 mensagem: error,
             });
         }
-    
+
         return res.json({
             tipo: "Deletar relação com embalagem",
             mensagem: `Relação com embalagem deletada com sucesso!`,
         });
-    
+
     } catch (err) {
         res.json({
             tipo: "Erro",
             mensagem: err,
         });
     }
-    };
-    
-    // DELETE FRELAÇÃO R
-    export const deleteFRelacaoR = async (req, res) => {
+};
+
+// DELETE FRELAÇÃO R
+export const deleteFRelacaoR = async (req, res) => {
     try {
         const { id } = req.body;
-    
+
         const { error } = await db.from('rotulo_has_fornecedor').delete().eq('rotulo_id', id);
-    
+
         if (error) {
             return res.json({
                 tipo: "Erro ao deletar rotulo",
                 mensagem: error,
             });
         }
-    
+
         return res.json({
             tipo: "Deletar relação com rotulo",
             mensagem: `Relação com rotulo deletada com sucesso!`,
         });
-    
+
     } catch (err) {
         res.json({
             tipo: "Erro",
             mensagem: err,
         });
     }
-    };
-    
-    // LISTAR FORNECEDOR MATERIA PRIMA MIN
-    export const listarFornecedorMateriaPrimaMin = async (req, res) => {
+};
+
+// LISTAR FORNECEDOR MATERIA PRIMA MIN
+export const listarFornecedorMateriaPrimaMin = async (req, res) => {
     try {
         const { id } = req.body;
 
         const { data, error } = await db.from('materiaprima_has_fornecedor').select('fornecedor_id, quantidade_minima, preco, fornecedor:fornecedor_id(*)').eq('materiaPrima_id', id);
-    
+
         if (error) {
             return res.json({
                 tipo: "Erro ao retornar dados do forncedor",
@@ -385,32 +385,32 @@ export const deleteFornecedorRotulo = async (req, res) => {
         }
 
         let formattedData = []
-        
-        data.forEach(function(mpData) {
+
+        data.forEach(function (mpData) {
             const fornecedor = mpData.fornecedor
             delete mpData.fornecedor
-            formattedData.push({...mpData, ...fornecedor})
+            formattedData.push({ ...mpData, ...fornecedor })
         })
-    
+
         return res.json({
             listaF: formattedData
         });
-    
+
     } catch (err) {
         res.json({
             tipo: "Erro",
             mensagem: err,
         });
     }
-    };
-    
-    // LISTAR FORNECEDOR ROTULO MIN
-    export const listarFornecedorRotuloMin = async (req, res) => {
+};
+
+// LISTAR FORNECEDOR ROTULO MIN
+export const listarFornecedorRotuloMin = async (req, res) => {
     try {
         const { id } = req.body;
-    
+
         const { data, error } = await db.from('rotulo_has_fornecedor').select('fornecedor_id, quantidade_minima, preco, fornecedor:fornecedor_id(*)').eq('rotulo_id', id);
-    
+
         if (error) {
             return res.json({
                 tipo: "Erro ao retornar dados do forncedor",
@@ -419,21 +419,151 @@ export const deleteFornecedorRotulo = async (req, res) => {
         }
 
         let formattedData = []
-        
-        data.forEach(function(mpData) {
+
+        data.forEach(function (mpData) {
             const fornecedor = mpData.fornecedor
             delete mpData.fornecedor
-            formattedData.push({...mpData, ...fornecedor})
+            formattedData.push({ ...mpData, ...fornecedor })
         })
-    
+
         return res.json({
             listaF: formattedData
         });
-    
+
     } catch (err) {
         res.json({
             tipo: "Erro",
             mensagem: err,
         });
     }
-    };
+};
+
+// LISTAR FORNECEDOR EMBALAGENS
+export const listarFornecedorEmbalagens = async (req, res) => {
+    try {
+        const { fornecedor_id } = req.body;
+
+        const { data, error } = await db.from('embalagem_has_fornecedor').select('*, embalagem:embalagem_id(*)').eq('fornecedor_id', fornecedor_id);
+
+        if (error) {
+            return res.json({
+                tipo: "Erro ao retornar dados dos fornecedores",
+                mensagem: error,
+            });
+        }
+
+        let formattedData = []
+
+        data.forEach(function (fornecedorData) {
+            const embalagem = fornecedorData.embalagem
+            delete fornecedorData.embalagem
+            formattedData.push({ ...fornecedorData, ...embalagem })
+        })
+
+        return res.json({
+            fornecedores: formattedData
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// UPDATE FORNECEDOR R
+export const updateFornecedorR = async (req, res) => {
+    try {
+        const { fornecedores, rotulo_id } = req.body;
+
+        for (let i = 0; i < fornecedores.length; i++) {
+            const { preco, minQtd, id: fornecedor_id } = fornecedores[i];
+
+            const { error } = await db.from('rotulo_has_fornecedor').update({ preco: Number(preco.replace(",", ".").replace("R$", "")), quantidade_minima: Number(minQtd) }).eq('rotulo_id', rotulo_id).eq('fornecedor_id', fornecedor_id);
+
+            if (error) {
+                return res.json({
+                    tipo: "Erro ao atualizar fornecedores do rótulo",
+                    mensagem: error,
+                });
+            }
+        }
+
+        return res.json({
+            tipo: "Atualização de Fornecedor",
+            mensagem: `Fornecedores atualizados com sucesso!`,
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// UPDATE FORNECEDOR E
+export const updateFornecedorE = async (req, res) => {
+    try {
+        const { fornecedores, embalagem_id } = req.body;
+
+        for (let i = 0; i < fornecedores.length; i++) {
+            const { preco, minQtd, id: fornecedor_id } = fornecedores[i];
+
+            const { error } = await db.from('embalagem_has_fornecedor').update({ preco: Number(preco.replace(",", ".").replace("R$", "")), quantidade_minima: Number(minQtd) }).eq('embalagem_id', embalagem_id).eq('fornecedor_id', fornecedor_id);
+
+            if (error) {
+                return res.json({
+                    tipo: "Erro ao atualizar fornecedores da embalagem",
+                    mensagem: error,
+                });
+            }
+        }
+
+        return res.json({
+            tipo: "Atualização de Fornecedor",
+            mensagem: `Fornecedores atualizados com sucesso!`,
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// LISTAR FORNECEDOR EMBALAGEM MIN
+export const listarFornecedorEmbalagemMin = async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        const { data, error } = await db.from('embalagem_has_fornecedor').select('fornecedor_id, quantidade_minima, preco, fornecedor:fornecedor_id(*)').eq('embalagem_id', id);
+
+        if (error) {
+            return res.json({
+                tipo: "Erro ao retornar dados do forncedor",
+                mensagem: error,
+            });
+        }
+
+        let formattedData = []
+
+        data.forEach(function (embalagemData) {
+            const fornecedor = embalagemData.fornecedor
+            delete embalagemData.fornecedor
+            formattedData.push({ ...embalagemData, ...fornecedor })
+        })
+
+        return res.json({
+            listaF: formattedData
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};

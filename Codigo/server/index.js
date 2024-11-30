@@ -22,12 +22,12 @@ const __dirname = path.dirname(__filename)
 /* Local imports */
 import { cadastro, login, listaUsuarios, usuarioEspecifico, deletarUsuario, alterarNomeUsuario, alterarEmailUsuario, alterarPermissaoUsuario } from "./controllers/usuario.js"
 import { selectOrigem, getIdOrigem } from "./controllers/origem.js";
-import { cadastraMateriaPrima, listarMateriaPrima, updateMateriaPrima, deleteMateriaPrima, selectMateriasPrimas, baixaMateriaPrima, verificarEstoque, preencheTabelaMP, listarMateriaPrimaMin, listarMateriaPrimaMod, getMP, filtrarMateriaPrima } from "./controllers/materia-prima.js";
-import { listarRotulo, updateRotulo, deleteRotulo, cadastrarRotulo, selectRotulo, listarRotulos } from "./controllers/rotulo.js"
+import { cadastraMateriaPrima, listarMateriaPrima, updateMateriaPrima, deleteMateriaPrima, selectMateriasPrimas, baixaMateriaPrima, verificarEstoque, preencheTabelaMP, listarMateriaPrimaMin, listarMateriaPrimaMod, getMP, filtrarMateriaPrima, updateFornecedorMP, listarFornecedoresMP, deleteMPHasF, listarFornecedorMateriaPrima, precoMP } from "./controllers/materia-prima.js";
+import { listarRotulo, updateRotulo, deleteRotulo, cadastrarRotulo, selectRotulo, listarRotulos, baixaRotulo, listarRotuloMin, listarRotuloMod } from "./controllers/rotulo.js"
 import { cadastraEmbalagem, selectEmbalagem, deleteEmbalagem, updateEmbalagem, listarEmbalagens, listarEmbalagem, baixaEmbalagem, listarEmbalagemMin, listarEmbalagemMod } from "./controllers/embalagem.js"
 import { cadastrarFormula, selectFormula, deleteFormula, listarFormulas, listarFormulasId } from "./controllers/formula.js";
 import { cadastrarProduto, produtoHasEmbalagem, deletePHasE, listarProdutos, deleteProduto, updateProduto } from "./controllers/produto.js";
-import { cadastrarRotuloHasFornecedor, cadastraFornecedorHasEmbalagem, selectFornecedores, cadastraFornecedor, updateFornecedor, deleteFornecedor, listarFornecedoresE, listarFornecedoresRotulo, deleteFornecedorRotulo, deleteFornecedorE, deleteFRelacaoMP, deleteFRelacaoE, deleteFRelacaoR, listarFornecedorMateriaPrimaMin, listarFornecedorRotuloMin } from "./controllers/fornecedor.js";
+import { cadastrarRotuloHasFornecedor, cadastraFornecedorHasEmbalagem, selectFornecedores, cadastraFornecedor, updateFornecedor, deleteFornecedor, listarFornecedoresE, listarFornecedoresRotulo, deleteFornecedorRotulo, deleteFornecedorE, deleteFRelacaoMP, deleteFRelacaoE, deleteFRelacaoR, listarFornecedorMateriaPrimaMin, listarFornecedorRotuloMin, listarFornecedorEmbalagens, updateFornecedorR, updateFornecedorE, listarFornecedorEmbalagemMin } from "./controllers/fornecedor.js";
 import { adicionaObservacao, listarProducoes, listarProducaoEspecifica, listarMateriaPrimaDaProducao, listarRotuloDaProducao, listarMudancas, producoesUltimaSemana } from "./controllers/producao.js";
 
 /* ROUTES */
@@ -49,6 +49,7 @@ app.post("/alterarNomeUsuario", alterarNomeUsuario)
 app.post("/alterarEmailUsuario", alterarEmailUsuario)
 app.post("/alterarPermissaoUsuario", alterarPermissaoUsuario)
 app.post("/deleteMateriaPrima", deleteMateriaPrima)
+app.get("/selectMateriasPrimas", selectMateriasPrimas)
 app.post("/selectMateriasPrimas", selectMateriasPrimas)
 app.post("/baixaMateriaPrima", baixaMateriaPrima)
 app.post("/verificarEstoque", verificarEstoque)
@@ -80,6 +81,7 @@ app.post("/listarFormulasId", listarFormulasId)
 app.post("/cadastrarProduto", cadastrarProduto)
 app.post("/produtoHasEmbalagem", produtoHasEmbalagem)
 app.post("/deletePHasE", deletePHasE)
+app.post("/listarProdutos", listarProdutos)
 app.get("/listarProdutos", listarProdutos)
 app.post("/deleteProduto", deleteProduto)
 app.post("/updateProduto", updateProduto)
@@ -106,6 +108,18 @@ app.post("/listarMateriaPrimaDaProducao", listarMateriaPrimaDaProducao)
 app.post("/listarRotuloDaProducao", listarRotuloDaProducao)
 app.post("/listarMudancas", listarMudancas)
 app.post("/producoesUltimaSemana", producoesUltimaSemana)
+app.post("/updateFornecedorMP", updateFornecedorMP)
+app.post("/listarFornecedoresMP", listarFornecedoresMP)
+app.post("/deleteMPHasF", deleteMPHasF)
+app.post("/listarFornecedorMateriaPrima", listarFornecedorMateriaPrima)
+app.post("/precoMP", precoMP)
+app.post("/listarFornecedorEmbalagens", listarFornecedorEmbalagens)
+app.post("/updateFornecedorR", updateFornecedorR)
+app.post("/updateFornecedorE", updateFornecedorE)
+app.post("/listarFornecedorEmbalagemMin", listarFornecedorEmbalagemMin)
+app.post("/baixaRotulo", baixaRotulo)
+app.post("/listarRotuloMin", listarRotuloMin)
+app.post("/listarRotuloMin", listarRotuloMin)
 
 /* SERVER CONFIG */
 const PORT = 3303
