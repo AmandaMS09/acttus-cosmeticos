@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "Aplicação funcionando",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "test:cucumber": "cucumber-js"
   },
   "keywords": [
     "controle",
@@ -24,7 +25,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "mysql": "^2.18.1",
-    "nodemon": "^3.1.7"
+    "mysql2": "^3.11.5",
+    "node-fetch": "^2.7.0",
+    "nodemon": "^3.1.7",
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.1.0"
   }
 }

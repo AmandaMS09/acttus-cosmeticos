@@ -44,17 +44,11 @@ async function cadastrar(event) {
                 senha: senha,
                 email: email
             }),
-
-
         })
 
         var data = await resp.json()
         sessionStorage.setItem('usuario', JSON.stringify(data.usuario))
         window.location.assign("index.html")
-
-        console.log(nome)
-        console.log(email)
-        console.log(senha)
 
     }
 }
