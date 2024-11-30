@@ -189,7 +189,18 @@ export const baixaMateriaPrima = async (req, res) => {
     try {
         const { quant, id } = req.body;
 
-        const { error } = await db.from('materiaprima').update({ estoque: db.raw(`estoque - ${quant}`) }).eq('id', id);
+        const { data, error: selectError } = await db.from('materiaprima').select('estoque').eq('id', id);
+
+        if (selectError) {
+            return res.json({
+                tipo: "Erro ao dar baixa na Materia Prima",
+                mensagem: selectError,
+            });
+        }
+
+        const estoque = Number(data[0].estoque) - quant
+
+        const { error } = await db.from('materiaprima').update('estoque', estoque).eq('id', id);
 
         if (error) {
             return res.json({
@@ -239,8 +250,7 @@ export const verificarEstoque = async (req, res) => {
 export const preencheTabelaMP = async (req, res) => {
     try {
         const { formula } = req.body;
-
-        const { data, error } = await db.raw(`SELECT materiaPrima.id, materiaPrima.nome, materiaPrima.estoque, formula_has_materiaPrima.porcentagem, formula_has_materiaPrima.passo from formula_has_materiaPrima join materiaPrima on formula_has_materiaPrima.formula_id = ${formula} and formula_has_materiaPrima.materiaPrima_id = materiaPrima.id`);
+        const { data, error } = await db.from('formula_has_materiaprima').select('formula_id, porcentagem, passo, materiaprima:materiaprima_id(id, nome, estoque)').eq('formula_id', formula);
 
         if (error) {
             return res.json({
@@ -249,8 +259,16 @@ export const preencheTabelaMP = async (req, res) => {
             });
         }
 
+        let formattedData = []
+        
+        data.forEach(function(formulaData) {
+            const materiaprima = formulaData.materiaprima
+            delete formulaData.materiaprima
+            formattedData.push({...formulaData, ...materiaprima})
+        })
+
         return res.json({
-            mP: data
+            mP: formattedData
         });
 
     } catch (err) {
@@ -316,7 +334,9 @@ export const getMP = async (req, res) => {
     try {
         const { id } = req.body;
 
-        const { data, error } = await db.raw(`SELECT mP.id, mP.nome, mP.estoque, mPhF.materiaPrima_id, mPhF.fornecedor_id, mPhf.preco, f.id as fornecedorID, f.nome as fornecedorNome, f.email, f.telefone FROM materiaPrima mP JOIN materiaPrima_has_fornecedor mPhF ON mP.id = mPhF.materiaPrima_id JOIN fornecedor f ON f.id = mPhF.fornecedor_id WHERE mP.id = ${id}`);
+        const { data, error } = await db.from('materiaprima_has_fornecedor').select('materiaprima_id, fornecedor_id, preco, materiaprima:materiaprima_id(id, nome, estoque), fornecedor:fornecedor_id(id, nome, email, telefone)').eq('materiaprima_id', id);
+
+        //id e nome do fornecedor tem que trocar os nomes
 
         if (error) {
             return res.json({
@@ -325,8 +345,22 @@ export const getMP = async (req, res) => {
             });
         }
 
+        let formattedData = []
+        
+        data.forEach(function(mpF) {
+            const materiaprima = mpF.materiaprima
+            delete mpF.materiaprima
+            let fornecedor = mpF.fornecedor
+            delete mpF.fornecedor
+            fornecedor['fornecedorId'] = fornecedor['id'];
+            delete fornecedor['id'];
+            fornecedor['fornecedorNome'] = fornecedor['nome'];
+            delete fornecedor['nome'];
+            formattedData.push({...mpF, ...materiaprima, ...fornecedor})
+        })
+
         return res.json({
-            mP: data
+            mP: formattedData
         });
 
     } catch (err) {
