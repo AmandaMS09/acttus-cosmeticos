@@ -72,3 +72,5 @@ app.post("/listarEmbalagemMod", listarEmbalagemMod)
 /* SERVER CONFIG */
 const PORT = 3303
 app.listen(PORT, () => console.log(`Server Port ${PORT} running.`))
+
+export default app;

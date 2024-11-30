@@ -5,10 +5,10 @@
   "main": "server/index.js",
   "type": "module",
   "scripts": {
-	"app":"nodemon /server/index.js",
+    "app": "nodemon /server/index.js",
     "test": "Aplicação funcionando",
     "start": "nodemon app.js",
-	"test:jest": "jest",
+    "test:mocha": "mocha 'server/test/**/*.js'",
     "test:cucumber": "cucumber-js"
   },
   "keywords": [
@@ -28,6 +28,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "mocha": "^10.8.2",
     "mysql2": "^3.11.5",
     "node-fetch": "^2.7.0",
     "nodemon": "^3.1.7",
@@ -35,7 +36,6 @@
   },
   "devDependencies": {
     "@cucumber/cucumber": "^11.1.0",
-    "jest": "^29.7.0",
     "supertest": "^7.0.0"
   }
 }
