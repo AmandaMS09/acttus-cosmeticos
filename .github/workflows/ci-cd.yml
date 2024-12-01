@@ -26,13 +26,13 @@ jobs:
       working-directory: ./Codigo
       run: npm install
       
-   # - name: Run Cucumber tests
-   #   working-directory: Codigo
-   #   run: npm run test:cucumber
+    - name: Run Cucumber tests
+      working-directory: Codigo
+      run: npm run test:cucumber
 
-   # - name: Run Mocha tests
-   #   working-directory: Codigo
-   #   run: npm run test:mocha
+    - name: Run Mocha tests
+      working-directory: Codigo
+      run: npm run test:mocha
 
 
     - name: Debug Environment Variables
