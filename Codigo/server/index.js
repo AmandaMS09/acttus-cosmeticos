@@ -32,7 +32,7 @@ import { adicionaObservacao, listarProducoes, listarProducaoEspecifica, listarMa
 
 /* ROUTES */
 app.get("/", function (req, res) {
-    res.sendFile("landing.html", { root: __dirname })
+  res.sendFile(path.join(__dirname, '../public/login.html'));
 })
 
 app.post("/cadastro", cadastro)
