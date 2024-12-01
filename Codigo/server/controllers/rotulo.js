@@ -167,7 +167,7 @@ export const cadastrarRotulo = async (req, res) => {
 export const selectRotulo = async (req, res) => {
     try {
         const { data, error } = await db.from('rotulo_has_fornecedor').select('*, rotulo:rotulo_id(*)');
-        
+
         if (error) {
             console.log('Entrou no erro')
             return res.json({
@@ -177,11 +177,11 @@ export const selectRotulo = async (req, res) => {
         }
 
         let formattedData = []
-        
-        data.forEach(function(rotuloData) {
+
+        data.forEach(function (rotuloData) {
             const rotulo = rotuloData.rotulo
             delete rotuloData.rotulo
-            formattedData.push({...rotuloData, ...rotulo})
+            formattedData.push({ ...rotuloData, ...rotulo })
         })
 
         res.send(JSON.stringify(formattedData));
@@ -209,6 +209,94 @@ export const listarRotulos = async (req, res) => {
 
         return res.json({
             rotulos: data
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// BAIXA ROTULO
+export const baixaRotulo = async (req, res) => {
+    try {
+        const { quant, id } = req.body;
+
+        const { data, error: selectError } = await db.from('rotulo').select('estoque').eq('id', id);
+
+        if (selectError) {
+            return res.json({
+                tipo: "Erro ao dar baixa no rotulo",
+                mensagem: selectError,
+            });
+        }
+
+        const estoque = Number(data[0].estoque) - quant
+
+        const { error } = await db.from('rotulo').update({ estoque }).eq('id', id);
+
+        if (error) {
+            return res.json({
+                tipo: "Erro ao dar baixa no rotulo",
+                mensagem: error,
+            });
+        }
+
+        return res.json({
+            tipo: "Baixa baixa no rotulo",
+            mensagem: `Baixa no rotulo foi um sucesso`,
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// LISTAR ROTULO MIN
+export const listarRotuloMin = async (req, res) => {
+    try {
+        const { data, error } = await db.from('listar_rotulo_min').select();
+
+        if (error) {
+            return res.json({
+                tipo: "Erro ao retornar dados das Rotulos ",
+                mensagem: error,
+            });
+        }
+
+        return res.json({
+            lista: data
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// LISTAR ROTULO MOD
+export const listarRotuloMod = async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        const { data, error } = await db.from('rotulo').select().eq('id', id);
+
+        if (error) {
+            return res.json({
+                tipo: "Erro ao retornar dados das Rotulos ",
+                mensagem: error,
+            });
+        }
+
+        return res.json({
+            lista: data
         });
 
     } catch (err) {

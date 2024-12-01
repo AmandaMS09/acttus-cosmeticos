@@ -1358,12 +1358,10 @@ app.post("/updateFornecedorE", function (req, res) {
 });
 
 app.post("/listarFormulas", function (req, res) {
-  let restricao = ""
-  if (req.body.restricao)
-    restricao = req.body.restricao;
+  let id_produto = req.body.produto_id;
   var formulas = []
   connection.query(
-    `select * from formula ${restricao};`,
+    `select * from formula where produto_id = ${id_produto};`,
     (err, rows, fields) => {
 
       if (err) {

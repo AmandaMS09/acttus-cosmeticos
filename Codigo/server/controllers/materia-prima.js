@@ -260,11 +260,11 @@ export const preencheTabelaMP = async (req, res) => {
         }
 
         let formattedData = []
-        
-        data.forEach(function(formulaData) {
+
+        data.forEach(function (formulaData) {
             const materiaprima = formulaData.materiaprima
             delete formulaData.materiaprima
-            formattedData.push({...formulaData, ...materiaprima})
+            formattedData.push({ ...formulaData, ...materiaprima })
         })
 
         return res.json({
@@ -346,8 +346,8 @@ export const getMP = async (req, res) => {
         }
 
         let formattedData = []
-        
-        data.forEach(function(mpF) {
+
+        data.forEach(function (mpF) {
             const materiaprima = mpF.materiaprima
             delete mpF.materiaprima
             let fornecedor = mpF.fornecedor
@@ -356,7 +356,7 @@ export const getMP = async (req, res) => {
             delete fornecedor['id'];
             fornecedor['fornecedorNome'] = fornecedor['nome'];
             delete fornecedor['nome'];
-            formattedData.push({...mpF, ...materiaprima, ...fornecedor})
+            formattedData.push({ ...mpF, ...materiaprima, ...fornecedor })
         })
 
         return res.json({
@@ -387,6 +387,158 @@ export const filtrarMateriaPrima = async (req, res) => {
 
         return res.json({
             materiaPrima: data
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// UPDATE FORNECEDOR MP
+export const updateFornecedorMP = async (req, res) => {
+    try {
+        const { fornecedores, MP_id } = req.body;
+
+        for (let i = 0; i < fornecedores.length; i++) {
+            const { preco, minQtd, id: fornecedor_id } = fornecedores[i];
+
+            const { error } = await db.from('materiaprima_has_fornecedor').update({ preco: Number(preco.replace(",", ".").replace("R$", "")), quantidade_minima: Number(minQtd) }).eq('materiaprima_id', MP_id).eq('fornecedor_id', fornecedor_id);
+
+            if (error) {
+                return res.json({
+                    tipo: "Erro ao atualizar fornecedores da matéria prima",
+                    mensagem: error,
+                });
+            }
+        }
+
+        return res.json({
+            tipo: "Atualização de Fornecedor",
+            mensagem: `Fornecedores atualizados com sucesso!`,
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// LISTAR FORNECEDORES MP
+export const listarFornecedoresMP = async (req, res) => {
+    try {
+        const { materiaPrima_id } = req.body;
+
+        const { data, error } = await db.from('materiaprima_has_fornecedor').select('*, fornecedor:fornecedor_id(*)').eq('materiaprima_id', materiaPrima_id);
+
+        if (error) {
+            return res.json({
+                tipo: "Erro ao retornar dados dos fornecedores",
+                mensagem: error,
+            });
+        }
+
+        let formattedData = []
+
+        data.forEach(function (mpData) {
+            const fornecedor = mpData.fornecedor
+            delete mpData.fornecedor
+            formattedData.push({ ...mpData, ...fornecedor })
+        })
+
+        return res.json({
+            fornecedores: formattedData
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// DELETE MP HAS F
+export const deleteMPHasF = async (req, res) => {
+    try {
+        const { materiaPrima_id, fornecedor_id } = req.body;
+
+        const { error } = await db.from('materiaprima_has_fornecedor').delete().eq('materiaprima_id', materiaPrima_id).eq('fornecedor_id', fornecedor_id);
+
+        if (error) {
+            return res.json({
+                tipo: "Erro ao deletar matéria prima",
+                mensagem: error,
+            });
+        }
+
+        return res.json({
+            tipo: "Deletar Matéria prima",
+            mensagem: "Matéria prima deletada com sucesso",
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// LISTAR FORNECEDOR MATERIA PRIMA
+export const listarFornecedorMateriaPrima = async (req, res) => {
+    try {
+        const { fornecedor_id } = req.body;
+
+        const { data, error } = await db.from('materiaprima_has_fornecedor').select('*, materiaprima:materiaprima_id(*)').eq('fornecedor_id', fornecedor_id);
+
+        if (error) {
+            return res.json({
+                tipo: "Erro ao retornar dados dos fornecedores",
+                mensagem: error,
+            });
+        }
+
+        let formattedData = []
+
+        data.forEach(function (mpData) {
+            const materiaprima = mpData.materiaprima
+            delete mpData.materiaprima
+            formattedData.push({ ...mpData, ...materiaprima })
+        })
+
+        return res.json({
+            fornecedores: formattedData
+        });
+
+    } catch (err) {
+        res.json({
+            tipo: "Erro",
+            mensagem: err,
+        });
+    }
+};
+
+// PRECO MP
+export const precoMP = async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        const { data, error } = await db.from('materiaprima_has_fornecedor').select('preco').eq('materiaprima_id', id).order('preco', { ascending: false }).limit(1);
+
+        if (error) {
+            return res.json({
+                tipo: "Erro ao retornar preco máximo da matériaa prima",
+                mensagem: error,
+            });
+        }
+
+        return res.json({
+            preco: data[0].preco
         });
 
     } catch (err) {

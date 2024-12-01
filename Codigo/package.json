@@ -9,7 +9,8 @@
     "test": "Aplicação funcionando",
     "start": "nodemon app.js",
     "test:mocha": "mocha 'server/test/**/*.js'",
-    "test:cucumber": "cucumber-js"
+    "test:cucumber": "cucumber-js",
+    "app": "nodemon /server/index.js"
   },
   "keywords": [
     "controle",
@@ -32,10 +33,12 @@
     "mysql2": "^3.11.5",
     "node-fetch": "^2.7.0",
     "nodemon": "^3.1.7",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "rs": "file:"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^11.1.0",
     "supertest": "^7.0.0"
+    "cucumber": "^6.0.7"
   }
 }

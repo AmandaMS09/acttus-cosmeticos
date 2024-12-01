@@ -16,15 +16,18 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 16
+        node-version: 18
 
     - name: Install dependencies
+      working-directory: Codigo
       run: npm install
 
-    - name: Run unit tests
-      run: npm test
+    - name: Run Cucumber tests
+      working-directory: Codigo
+      run: npm run test:cucumber
 
     - name: Build application
+      working-directory: Codigo
       run: npm run build
 
   deploy:
@@ -33,6 +36,7 @@ jobs:
 
     steps:
     - name: Deploy to Docker
+      working-directory: Codigo
       run: |
         docker build -t acttus-cosmeticos .
         docker run -d -p 3000:3000 acttus-cosmeticos
