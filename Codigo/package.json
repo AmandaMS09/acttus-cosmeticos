@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@cucumber/cucumber": "^11.1.0",
-    "supertest": "^7.0.0"
+    "supertest": "^7.0.0",
     "cucumber": "^6.0.7"
   }
 }
