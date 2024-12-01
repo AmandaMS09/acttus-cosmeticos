@@ -121,4 +121,8 @@ app.post("/baixaRotulo", baixaRotulo)
 app.post("/listarRotuloMin", listarRotuloMin)
 app.post("/listarRotuloMin", listarRotuloMin)
 
-module.exports = app;
+/* SERVER CONFIG */
+const PORT = 3303
+app.listen(PORT, () => console.log(`Server Port ${PORT} running.`))
+
+export default app;
