@@ -33,17 +33,17 @@ jobs:
 
     - name: Debug Environment Variables
       env:
-        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        SUPABASE_URL: ${{ env.SUPABASE_URL }}
+        SUPABASE_KEY: ${{ env.SUPABASE_KEY }}
       run: |
-        echo "SUPABASE_URL: ${{secrets.SUPABASE_URL}}"
-        [ -z "${{secrets.SUPABASE_KEY}}" ] && echo "SUPABASE_KEY is missing" || echo "SUPABASE_KEY is set"
+        echo "SUPABASE_URL: ${{env.SUPABASE_URL}}"
+        [ -z "${{env.SUPABASE_KEY}}" ] && echo "SUPABASE_KEY is missing" || echo "SUPABASE_KEY is set"
 
     - name: Run Application
       working-directory: Codigo
       env:
-        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        SUPABASE_URL: ${{ env.SUPABASE_URL }}
+        SUPABASE_KEY: ${{ env.SUPABASE_KEY }}
       run: npm start
 
   deploy:
