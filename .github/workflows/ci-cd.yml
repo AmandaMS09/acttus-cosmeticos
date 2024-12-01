@@ -19,7 +19,7 @@ jobs:
         node-version: 18
 
     - name: Install dependencies
-      working-directory: Codigo
+      working-directory: ./Codigo
       run: npm install
       
    # - name: Run Cucumber tests
@@ -33,17 +33,17 @@ jobs:
 
     - name: Debug Environment Variables
       env:
-        SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-        SUPABASE_KEY: ${{ vars.SUPABASE_KEY }}
+        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
       run: |
-        echo "SUPABASE_URL: ${{vars.SUPABASE_URL}}"
-        [ -z "${{vars.SUPABASE_KEY}}" ] && echo "SUPABASE_KEY is missing" || echo "SUPABASE_KEY is set"
+        echo "SUPABASE_URL: ${{secrets.SUPABASE_URL}}"
+        [ -z "${{secrets.SUPABASE_KEY}}" ] && echo "SUPABASE_KEY is missing" || echo "SUPABASE_KEY is set"
 
     - name: Run Application
       working-directory: Codigo
       env:
-        SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-        SUPABASE_KEY: ${{ vars.SUPABASE_KEY }}
+        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
       run: npm start
 
   deploy:
