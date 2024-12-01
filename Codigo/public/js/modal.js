@@ -1,4 +1,4 @@
-const { default: API_URL } = require("./constants");
+const API_URL='https://acttus-cosmeticos.vercel.app'
 
 // Inicio modal patrocionio
 
