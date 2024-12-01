@@ -1,7 +1,3 @@
-export default {
-  default: {
-    paths: ["features/**/*.feature"],
-    require: ["features/**/*.js"],
-    format: ["pretty"],
-  },
+module.exports = {
+    default: '--require features/step_definitions/*.js --format progress'
 };
