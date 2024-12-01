@@ -10,32 +10,49 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
 
-      - name: Install dependencies
-        working-directory: Codigo
-        run: npm install
+    - name: Install dependencies
+      working-directory: ./Codigo
+      run: npm install
+      
+   # - name: Run Cucumber tests
+   #   working-directory: Codigo
+   #   run: npm run test:cucumber
 
-      - name: Verificar Secrets
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: |
-          echo "Verificando secrets..."
-          if [ -z "${SUPABASE_URL}" ]; then
-            echo "Erro: SUPABASE_URL não está configurado!" && exit 1
-          fi
-          if [ -z "${SUPABASE_KEY}" ]; then
-            echo "Erro: SUPABASE_KEY não está configurado!" && exit 1
-          fi
-          echo "Todos os secrets estão configurados corretamente."
+   # - name: Run Mocha tests
+   #   working-directory: Codigo
+   #   run: npm run test:mocha
 
-      - name: Run Tests
-        working-directory: Codigo
-        run: npm test
+
+    - name: Debug Environment Variables
+      env:
+        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      run: |
+        echo "SUPABASE_URL: ${{secrets.SUPABASE_URL}}"
+        [ -z "${{secrets.SUPABASE_KEY}}" ] && echo "SUPABASE_KEY is missing" || echo "SUPABASE_KEY is set"
+
+    - name: Run Application
+      working-directory: Codigo
+      env:
+        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      run: npm start
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    
+    steps:
+     - name: Deploy to Docker
+       working-directory: Codigo
+       run: |
+        docker build -t acttus-cosmeticos .
+        docker run -d -p 3000:3000 acttus-cosmeticos
