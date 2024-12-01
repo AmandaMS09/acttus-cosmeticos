@@ -1,5 +1,9 @@
 name: CI/CD Pipeline
 
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  
 on:
   push:
     branches:
@@ -39,20 +43,16 @@ jobs:
         echo "SUPABASE_URL=${{ env.SUPABASE_URL }}"
         [ -z "${{ env.SUPABASE_KEY }}" ] && echo "SUPABASE_KEY is missing" || echo "SUPABASE_KEY is set"
 
-    - name: Run Application
-      working-directory: Codigo
-      env:
-        SUPABASE_URL: 'https://gltustnhaqwwjigoerrx.supabase.co'
-        SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdHVzdG5oYXF3d2ppZ29lcnJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI4MzQ0MDMsImV4cCI6MjA0ODQxMDQwM30.O_HEJ9CTo5GYX06xj0OEBxvWeT1lYlKuP2ThnezvKCM'
-      run: npm run app
-
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
-    
     steps:
-     - name: Deploy to Docker
-       working-directory: Codigo
-       run: |
-        docker build -t acttus-cosmeticos .
-        docker run -d -p 3000:3000 acttus-cosmeticos
+      - uses: actions/checkout@v3
+      - name: Install Vercel CLI
+        run: npm install --global vercel@canary
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
