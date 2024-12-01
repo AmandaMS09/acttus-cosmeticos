@@ -1,5 +1,9 @@
 name: CI/CD Pipeline
 
+env:
+  SUPABASE_URL: ${{secrets.SUPABASE_URL}}
+  SUPABASE_KEY: ${{secrets.SUPABASE_KEY}}
+
 on:
   push:
     branches:
@@ -33,17 +37,20 @@ jobs:
 
     - name: Debug Environment Variables
       env:
-        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        SUPABASE_URL: $SUPABASE_URL
+        SUPABASE_KEY: $SUPABASE_KEY
       run: |
-        echo "SUPABASE_URL: ${{secrets.SUPABASE_URL}}; GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}"
-        [ -z "${{secrets.SUPABASE_KEY}}" ] && echo "SUPABASE_KEY is missing" || echo "SUPABASE_KEY is set"
+        echo "SUPABASE_URL=$SUPABASE_URL" | base64 > secrets.txt
+        echo "SUPABASE_KEY=$SUPABASE_KEY" | base64 >> secrets.txt
+        cat secrets.txt
+        echo "SUPABASE_URL: $SUPABASE_URL"
+        [ -z "$SUPABASE_KEY" ] && echo "SUPABASE_KEY is missing" || echo "SUPABASE_KEY is set"
 
     - name: Run Application
       working-directory: Codigo
       env:
-        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        SUPABASE_URL: $SUPABASE_URL
+        SUPABASE_KEY: $SUPABASE_KEY
       run: npm start
 
   deploy:
