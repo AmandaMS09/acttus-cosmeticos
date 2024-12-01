@@ -31,7 +31,7 @@ import { cadastrarRotuloHasFornecedor, cadastraFornecedorHasEmbalagem, selectFor
 import { adicionaObservacao, listarProducoes, listarProducaoEspecifica, listarMateriaPrimaDaProducao, listarRotuloDaProducao, listarMudancas, producoesUltimaSemana } from "./controllers/producao.js";
 
 /* ROUTES */
-app.get("/", function (res) {
+app.get("/", function (req, res) {
     res.sendFile("landing.html", { root: __dirname })
 })
 
