@@ -1,9 +1,5 @@
 name: CI/CD Pipeline
 
-env:
-  SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-  SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-
 on:
   push:
     branches:
@@ -37,8 +33,8 @@ jobs:
 
     - name: Debug Environment Variables
       env:
-        SUPABASE_URL: ${{ env.SUPABASE_URL }}
-        SUPABASE_KEY: ${{ env.SUPABASE_KEY }}
+        SUPABASE_URL: 'https://gltustnhaqwwjigoerrx.supabase.co'
+        SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdHVzdG5oYXF3d2ppZ29lcnJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI4MzQ0MDMsImV4cCI6MjA0ODQxMDQwM30.O_HEJ9CTo5GYX06xj0OEBxvWeT1lYlKuP2ThnezvKCM'
       run: |
         echo "SUPABASE_URL=${{ env.SUPABASE_URL }}"
         [ -z "${{ env.SUPABASE_KEY }}" ] && echo "SUPABASE_KEY is missing" || echo "SUPABASE_KEY is set"
@@ -46,8 +42,8 @@ jobs:
     - name: Run Application
       working-directory: Codigo
       env:
-        SUPABASE_URL: ${{ env.SUPABASE_URL }}
-        SUPABASE_KEY: ${{ env.SUPABASE_KEY }}
+        SUPABASE_URL: 'https://gltustnhaqwwjigoerrx.supabase.co'
+        SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdHVzdG5oYXF3d2ppZ29lcnJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI4MzQ0MDMsImV4cCI6MjA0ODQxMDQwM30.O_HEJ9CTo5GYX06xj0OEBxvWeT1lYlKuP2ThnezvKCM'
       run: npm start
 
   deploy:
