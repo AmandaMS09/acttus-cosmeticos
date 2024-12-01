@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "type": "module",
   "scripts": {
-    "test": "echo 'Testes ainda não implementados'",
+    "test": "jest",
     "start": "nodemon /server/index.js",
     "test:cucumber": "cucumber-js",
     "app": "node /server/index.js"
@@ -34,7 +34,17 @@
     "rs": "file:"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/register": "^7.25.9",
     "@cucumber/cucumber": "^11.1.0",
-    "cucumber": "^6.0.7"
+    "babel-jest": "^29.7.0",
+    "cucumber": "^6.0.7",
+    "jest": "^29.6.1"
+  },
+  "jest": {
+  "transform": {
+    "^.+\\.jsx?$": "babel-jest"
   }
+}
 }
