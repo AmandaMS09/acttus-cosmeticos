@@ -36,8 +36,8 @@ jobs:
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
         SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
       run: |
-        echo "SUPABASE_URL: ${SUPABASE_URL}"
-        [ -z "${SUPABASE_KEY}" ] && echo "SUPABASE_KEY is missing" || echo "SUPABASE_KEY is set"
+        echo "SUPABASE_URL: ${{SUPABASE_URL}}"
+        [ -z "${{SUPABASE_KEY}}" ] && echo "SUPABASE_KEY is missing" || echo "SUPABASE_KEY is set"
 
     - name: Run Application
       working-directory: Codigo
