@@ -1,3 +1,4 @@
+const API_URL='https://acttus-cosmeticos.vercel.app'
 const { Given, When, Then } = require('@cucumber/cucumber');
 const fetch = require('node-fetch');
 const assert = require('assert');
@@ -10,7 +11,7 @@ Given('uma matéria prima já existe com ID {string}', async function (id) {
 });
 
 When('deleto a matéria prima com ID {string}', async function (id) {
-    response = await fetch("http://localhost:3303/deleteMateriaPrima", {
+    response = await fetch(`${API_URL}/deleteMateriaPrima`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: id }),

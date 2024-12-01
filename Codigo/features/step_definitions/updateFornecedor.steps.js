@@ -1,3 +1,4 @@
+const API_URL='https://acttus-cosmeticos.vercel.app'
 const { Given, When, Then } = require('@cucumber/cucumber');
 const fetch = require('node-fetch');
 const assert = require('assert');
@@ -18,7 +19,7 @@ When('atualizo o fornecedor com ID {string} para:', async function (id, tabela) 
         telefone: data[1][2], // Telefone
     };
 
-    response = await fetch("http://localhost:3303/updateFornecedor", {
+    response = await fetch(`${API_URL}/updateFornecedor`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(fornecedorAtualizado),

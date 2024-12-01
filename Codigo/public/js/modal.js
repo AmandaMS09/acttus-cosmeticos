@@ -1,3 +1,5 @@
+const { default: API_URL } = require("./constants");
+
 // Inicio modal patrocionio
 
 const openModalButton = document.querySelector("#openModal");
@@ -62,7 +64,7 @@ function selectFornecedores() {
     const dropdown = document.getElementById("select-fornecedor")
     $(".select-fornecedor").html(`<option value="0">Fornecedor</option>`)
     // Recebe a resposta enviada pela rota de pesquisa no banco de dados
-    fetch("http://localhost:3303/selectFornecedores", {
+    fetch(`${API_URL}/selectFornecedores`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {

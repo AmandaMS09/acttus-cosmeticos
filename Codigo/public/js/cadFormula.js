@@ -1,3 +1,5 @@
+const { default: API_URL } = require("./constants");
+
 function addMP(indice){
     switch(indice){
         case 1:
@@ -42,7 +44,7 @@ function removerMP(i){
 
 function selectMP(indice) {
     // Recebe a resposta enviada pela rota de pesquisa no banco de dados
-    fetch("http://localhost:3303/listarMateriaPrima", {
+    fetch(`${API_URL}/listarMateriaPrima`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {

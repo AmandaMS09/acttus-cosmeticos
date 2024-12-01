@@ -1,3 +1,5 @@
+const { default: API_URL } = require("./constants");
+
 // Função de cadastrar novo produto
 function cadastrarProduto(event) {
 
@@ -8,7 +10,7 @@ function cadastrarProduto(event) {
     var nome = document.getElementById("name").value;
     var lucro = document.getElementById("lucro").value;
 
-    fetch("http://localhost:3303/cadastrarProduto", {
+    fetch(`${API_URL}/cadastrarProduto`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -56,7 +58,7 @@ async function criaLocalStorageProduto(){       //revisar /rancar fora
 
 async function getRotulos() {       //jogar no main
 
-    var response = await fetch('http://localhost:3303/selectRotulo')
+    var response = await fetch(`${API_URL}/selectRotulo`)
     var data = await response.json()
 
     return data
@@ -64,7 +66,7 @@ async function getRotulos() {       //jogar no main
 
 async function getEmbalagens() {        // vou precisar (Ver)
 
-    var response = await fetch('http://localhost:3303/selectEmbalagem')
+    var response = await fetch(`${API_URL}/selectEmbalagem`)
     var data = await response.json()
 
     return data
@@ -72,7 +74,7 @@ async function getEmbalagens() {        // vou precisar (Ver)
 
 async function getFormulas() {          //jogar no main
 
-    const response = await fetch('http://localhost:3303/selectFormula')
+    const response = await fetch(`${API_URL}/selectFormula`)
     const data = await response.json()
 
     return data
@@ -218,7 +220,7 @@ async function innerHtmlFormula() {
     for(var i=0; i< productData.length; i++){
         let preco = 0
         for(var cont = 0; cont < productData[i].MateriasPrimas.length; cont++){
-            var response =  await fetch("http://localhost:3303/precoMP", {
+            var response =  await fetch(`${API_URL}/precoMP`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -348,7 +350,7 @@ function innerHtmlEmbalagemValores() {
 */
 
 function selectEmbalagens(id){
-    fetch("http://localhost:3303/selectEmbalagem", {
+    fetch(`${API_URL}/selectEmbalagem`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Methods': '*' }
     }).then(function (res) {
@@ -367,7 +369,7 @@ function selectEmbalagens(id){
 }
 
 function precoEmbalagem(index){
-    fetch("http://localhost:3303/selectEmbalagem", {
+    fetch(`${API_URL}/selectEmbalagem`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Methods': '*' }
     }).then(function (res) {
@@ -444,7 +446,7 @@ function pHasE(produto){
     if(!id_produto){
         return console.log("Identificador do produto não encontrado");
     }
-    fetch("http://localhost:3303/produtoHasEmbalagem", {
+    fetch(`${API_URL}/produtoHasEmbalagem`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

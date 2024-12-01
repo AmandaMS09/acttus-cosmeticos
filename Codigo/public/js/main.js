@@ -1,3 +1,5 @@
+const { default: API_URL } = require("./constants");
+
 const { json, response } = require("express")
 
 function estaLogado(p) {
@@ -32,7 +34,7 @@ async function cadastrar(event) {
         window.alert("Tenha certeza de preencher todos os campos")
     } else {
 
-        const url = `http://localhost:3303/cadastro`
+        const url = `${API_URL}/cadastro`
 
         var resp = await fetch(url, {
             method: "POST",
@@ -64,7 +66,7 @@ function login(event) {
         return window.alert("Preencha todos o dados")
     }
 
-    fetch("http://localhost:3303/login", {
+    fetch(`${API_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: usu_email, senha: usu_senha })
@@ -172,7 +174,7 @@ async function mudancasPT2() {
 }
 
 function getProdutos() {
-    fetch("http://localhost:3303/listarProdutos", {
+    fetch(`${API_URL}/listarProdutos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -209,7 +211,7 @@ function getProdutos() {
 
 
 async function getProdutoF(id_produto) {
-    var response = await fetch("http://localhost:3303/listarFormulas", {
+    var response = await fetch(`${API_URL}/listarFormulas`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -222,7 +224,7 @@ async function getProdutoF(id_produto) {
 
 function deleteFormula(id) {
     if (confirm("Deseja mesmo deletar essa fórmula?")) {
-        fetch("http://localhost:3303/deleteFormula", {
+        fetch(`${API_URL}/deleteFormula`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -239,7 +241,7 @@ function deleteFormula(id) {
 
 
 async function getProdutoE(id_produto) {
-    var response = await fetch("http://localhost:3303/listarEmbalagens", {
+    var response = await fetch(`${API_URL}/listarEmbalagens`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -252,7 +254,7 @@ async function getProdutoE(id_produto) {
 
 function deletePHasE(p_id, e_id) {
     if (confirm("Deseja mesmo remover essa embalagem do produto?")) {
-        fetch("http://localhost:3303/deletePHasE", {
+        fetch(`${API_URL}/deletePHasE`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -268,7 +270,7 @@ function deletePHasE(p_id, e_id) {
 }
 
 async function getProdutoR(id_produto) {
-    var response = await fetch("http://localhost:3303/listarRotulos", {
+    var response = await fetch(`${API_URL}/listarRotulos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -281,7 +283,7 @@ async function getProdutoR(id_produto) {
 
 function deleteRotulo(id) {
     if (confirm("Deseja mesmo deletar esse rótulo?")) {
-        fetch("http://localhost:3303/deleteRotulo", {
+        fetch(`${API_URL}/deleteRotulo`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -408,7 +410,7 @@ async function setModalProduto(id, nome, lucro) {
 }
 
 function deleteProduto(id) {
-    fetch("http://localhost:3303/deleteProduto", {
+    fetch(`${API_URL}/deleteProduto`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -431,7 +433,7 @@ function updateProduto(id) {
     pHasE(id)
     var nome = document.getElementById("modal_titulo").value
     var lucro = Number(document.getElementById("modalLucro").value.replace("%", ""))
-    fetch("http://localhost:3303/updateProduto", {
+    fetch(`${API_URL}/updateProduto`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -458,7 +460,7 @@ function perquisarOrigens() {
     const dropdown = document.getElementById("select-origem")
     $("#select-origem").html(``)
     // Recebe a resposta enviada pela rota de pesquisa no banco de dados
-    fetch("http://localhost:3303/selectOrigem", {
+    fetch(`${API_URL}/selectOrigem`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -476,7 +478,7 @@ function perquisarOrigens() {
 function getIdOrigem() {
 
     const origem = document.getElementById("origem").value;
-    fetch("http://localhost:3303/getIdOrigem", {
+    fetch(`${API_URL}/getIdOrigem`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Methods': '*' },
         body: JSON.stringify({
@@ -512,7 +514,7 @@ function cadastraMateriaPrima(event) {
         }
     }
 
-    fetch("http://localhost:3303/cadastraMateriaPrima", {
+    fetch(`${API_URL}/cadastraMateriaPrima`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Methods': '*' },
         body: JSON.stringify({
@@ -533,7 +535,7 @@ function cadastraMateriaPrima(event) {
 }
 
 function getMateriaPrima() {
-    fetch("http://localhost:3303/listarMateriaPrima", {
+    fetch(`${API_URL}/listarMateriaPrima`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -562,7 +564,7 @@ function getMateriaPrima() {
 }
 
 function filtraMateriaPrima(origem) {
-    fetch("http://localhost:3303/filtrarMateriaPrima", {
+    fetch(`${API_URL}/filtrarMateriaPrima`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -713,7 +715,7 @@ function updateMateriaPrima(id) {
     nome_origem = document.getElementById("modalOrigem").value
     origem_id = getIdOrigem(nome_origem)
 
-    fetch("http://localhost:3303/updateMateriaPrima", {
+    fetch(`${API_URL}/updateMateriaPrima`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -741,7 +743,7 @@ function updateFornecedorMP() {
     if (!f)
         return console.log("Sem dados de fornecedor para alterar")
     f = JSON.parse(f)
-    fetch("http://localhost:3303/updateFornecedorMP", {
+    fetch(`${API_URL}/updateFornecedorMP`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -759,7 +761,7 @@ function updateFornecedorMP() {
 }
 
 async function getMateriaPrimaFornecedor(materiaPrima_id) {
-    var response = await fetch("http://localhost:3303/listarFornecedoresMP", {
+    var response = await fetch(`${API_URL}/listarFornecedoresMP`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -771,7 +773,7 @@ async function getMateriaPrimaFornecedor(materiaPrima_id) {
 }
 
 function deleteMateriaPrima(id) {
-    fetch("http://localhost:3303/deleteMateriaPrima", {
+    fetch(`${API_URL}/deleteMateriaPrima`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -785,7 +787,7 @@ function deleteMateriaPrima(id) {
 }
 
 function deleteMPHasF(materiaPrima_id, fornecedor_id, linha) {
-    fetch("http://localhost:3303/deleteMPHasF", {
+    fetch(`${API_URL}/deleteMPHasF`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -803,7 +805,7 @@ function deleteMPHasF(materiaPrima_id, fornecedor_id, linha) {
 function selectMateriasPrimas() {
 
     document.getElementById("embalagem-0").innerHTML = ``
-    fetch("http://localhost:3303/selectMateriasPrimas", {
+    fetch(`${API_URL}/selectMateriasPrimas`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -817,7 +819,7 @@ function selectMateriasPrimas() {
 }
 
 function getRotulo() {
-    fetch("http://localhost:3303/listarRotulo", {
+    fetch(`${API_URL}/listarRotulo`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -847,7 +849,7 @@ function getRotulo() {
 
 async function getRotuloFornecedor(id_rotulo) {
 
-    var response = await fetch("http://localhost:3303/listarFornecedoresRotulo", {
+    var response = await fetch(`${API_URL}/listarFornecedoresRotulo`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -972,7 +974,7 @@ async function fazModalRotulo(id, tipo, principal, nome, produto_id, estoque, mi
 
 function deleteFornecedorRotulo(r_id, f_id, linha) {
     if (confirm("Deseja mesmo deletar esse fornecedor?")) {
-        fetch("http://localhost:3303/deleteFornecedorRotulo", {
+        fetch(`${API_URL}/deleteFornecedorRotulo`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -1019,7 +1021,7 @@ function updateRotulo(id) {
 
     //origem_id = getIdOrigem(nome_origem)
 
-    fetch("http://localhost:3303/updateRotulo", {
+    fetch(`${API_URL}/updateRotulo`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1129,7 +1131,7 @@ function cadastrarRotulos(produto) {
     dados = JSON.parse(dados)
     id_produto = JSON.parse(id_produto)
     console.log("passsei aki")
-    fetch("http://localhost:3303/cadastrarRotulo", {
+    fetch(`${API_URL}/cadastrarRotulo`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1151,7 +1153,7 @@ function cadastrarRotuloHasFornecedor() {
     var preco = document.querySelector("#preco-0")
     var preco = document.querySelector("#minQtd-0")
 
-    fetch("http://localhost:3303/cadastrarRotuloHasFornecedor", {
+    fetch(`${API_URL}/cadastrarRotuloHasFornecedor`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1230,7 +1232,7 @@ function cadastrarEmbalagem(event) {
         return window.alert("Selecione um tipo")
     } else {
 
-        fetch("http://localhost:3303/cadastraEmbalagem", {
+        fetch(`${API_URL}/cadastraEmbalagem`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -1259,7 +1261,7 @@ function cadastrarEmbalagem(event) {
 // Função para colocar as origens no dropdown
 function selectFornecedores(indice) {
     // Recebe a resposta enviada pela rota de pesquisa no banco de dados
-    fetch("http://localhost:3303/selectFornecedores", {
+    fetch(`${API_URL}/selectFornecedores`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -1295,7 +1297,7 @@ function cadastrarFornecedor(event) {
 
         {
 
-            fetch("http://localhost:3303/cadastraFornecedor", {
+            fetch(`${API_URL}/cadastraFornecedor`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -1323,7 +1325,7 @@ function cadastrarFornecedor(event) {
 
 async function getRotulos() {
 
-    var response = await fetch('http://localhost:3303/selectRotulo')
+    var response = await fetch(`${API_URL}/selectRotulo`)
     var data = await response.json()
 
     return data
@@ -1332,7 +1334,7 @@ async function getRotulos() {
 /*
 async function getEmbalagens() {       
  
-    var response = await fetch('http://localhost:3303/selectEmbalagem')
+    var response = await fetch(`${API_URL}/selectEmbalagem`)
     var data = await response.json()
  
     return data
@@ -1341,7 +1343,7 @@ async function getEmbalagens() {
 async function getFormulas() {
 
 
-    const response = await fetch('http://localhost:3303/selectFormula')
+    const response = await fetch(`${API_URL}/selectFormula`)
     const data = await response.json()
 
     return data
@@ -1380,7 +1382,7 @@ const toggleModal = () => {
 function acharFornecedores() {
 
 
-    fetch("http://localhost:3303/selectFornecedores", {
+    fetch(`${API_URL}/selectFornecedores`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -1427,7 +1429,7 @@ function acharFornecedores() {
     
         $("#cards-html").html(``)
         // Recebe a resposta enviada pela rota de pesquisa no banco de dados
-        fetch("http://localhost:3303/selectFornecedores", {
+        fetch(`${API_URL}/selectFornecedores`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
         }).then(function (res) {
@@ -1455,7 +1457,7 @@ function acharVendaFornecedores() {
 
     $("#info-card").html(``)
     // Recebe a resposta enviada pela rota de pesquisa no banco de dados
-    fetch("http://localhost:3303/selectFornecedores", {
+    fetch(`${API_URL}/selectFornecedores`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -1472,7 +1474,7 @@ function acharVendaFornecedores() {
 
 function deleteFornecedor(id) {
     if (confirm("Deseja mesmo deletar esse forncedor?")) {
-        fetch("http://localhost:3303/deleteFornecedor", {
+        fetch(`${API_URL}/deleteFornecedor`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
         }).then(function (res) {
@@ -1489,7 +1491,7 @@ function deleteFornecedor(id) {
 
 function deleteFornecedor(id) {
     if (confirm("Deseja mesmo deletar esse forncedor?")) {
-        fetch("http://localhost:3303/deleteFornecedor", {
+        fetch(`${API_URL}/deleteFornecedor`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -1512,7 +1514,7 @@ function deleteFornecedor(id) {
 
 //=============================================================================================
 async function getFornecedorEmbalagens(id_produto) {
-    var response = await fetch("http://localhost:3303/listarFormulas", {
+    var response = await fetch(`${API_URL}/listarFormulas`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1522,7 +1524,7 @@ async function getFornecedorEmbalagens(id_produto) {
 }
 //=============================================================================================
 async function getFornecedorEmbalagem(fornecedor_id) {
-    var response = await fetch("http://localhost:3303/listarFornecedorEmbalagens", {
+    var response = await fetch(`${API_URL}/listarFornecedorEmbalagens`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1534,7 +1536,7 @@ async function getFornecedorEmbalagem(fornecedor_id) {
 }
 
 async function getFornecedorRotulo(fornecedor_id) {
-    var response = await fetch("http://localhost:3303/listarFornecedorRotulo", {
+    var response = await fetch(`${API_URL}/listarFornecedorRotulo`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1548,7 +1550,7 @@ async function getFornecedorRotulo(fornecedor_id) {
 
 
 async function getFornecedorMateriaPrima(fornecedor_id) {
-    var response = await fetch("http://localhost:3303/listarFornecedorMateriaPrima", {
+    var response = await fetch(`${API_URL}/listarFornecedorMateriaPrima`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1646,7 +1648,7 @@ async function setModalFornecedores(id, nome, gmail, telefone) {
 //=======================================================================================================================================================================================================================================================================================
 
 function getEmbalagens() {
-    fetch("http://localhost:3303/listarEmbalagens", {
+    fetch(`${API_URL}/listarEmbalagens`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -1699,7 +1701,7 @@ function getEmbalagens() {
 }
 
 async function getEmbalagemFornecedor(id_embalagem) {
-    var response = await fetch("http://localhost:3303/listarFornecedoresE", {
+    var response = await fetch(`${API_URL}/listarFornecedoresE`, {
 
 
         method: 'POST',
@@ -1714,7 +1716,7 @@ async function getEmbalagemFornecedor(id_embalagem) {
 
 function deleteEmbalagemFornecedor(e_id, f_id, linha) {
     if (confirm("Deseja mesmo deletar esse fornecedor?")) {
-        fetch("http://localhost:3303/deleteFornecedorE", {
+        fetch(`${API_URL}/deleteFornecedorE`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -1841,7 +1843,7 @@ async function setModalEmbalagem(id, nome, tipo, tamanho, estoque, minimo) {
 }
 
 function deleteEmbalagem(id) {
-    fetch("http://localhost:3303/deleteEmbalagem", {
+    fetch(`${API_URL}/deleteEmbalagem`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1897,7 +1899,7 @@ function updateFornecedorR() {
     if (!f)
         return console.log("Sem dados de fornecedor para alterar")
     f = JSON.parse(f)
-    fetch("http://localhost:3303/updateFornecedorR", {
+    fetch(`${API_URL}/updateFornecedorR`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1919,7 +1921,7 @@ function updateFornecedorE() {
     if (!f)
         return console.log("Sem dados de fornecedor para alterar")
     f = JSON.parse(f)
-    fetch("http://localhost:3303/updateFornecedorE", {
+    fetch(`${API_URL}/updateFornecedorE`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1945,7 +1947,7 @@ function updateEmbalagem(id) {
     var tamanho = document.getElementById("mililitragemDaEmbalagem").value;
     var select = document.getElementById('tipoEmbalagem');
     var value = select.options[select.selectedIndex].value;
-    fetch("http://localhost:3303/updateEmbalagem", {
+    fetch(`${API_URL}/updateEmbalagem`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1972,7 +1974,7 @@ function updateFornecedor(id) {
     var nome = document.getElementById("nome_forn").value
     var email = document.getElementById("email_forn").value
     var telefone = document.getElementById("telefone_forn").value
-    fetch("http://localhost:3303/updateFornecedor", {
+    fetch(`${API_URL}/updateFornecedor`, {
         method: 'POST',
         headers: { 'content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1993,7 +1995,7 @@ function updateFornecedor(id) {
 //-------------------------------Deletar relação MP------------------------------------
 function deleteFRelacaoMP(id) {
     if (confirm("Deseja mesmo deletar essa relação?")) {
-        fetch("http://localhost:3303/deleteFRelacaoMP", {
+        fetch(`${API_URL}/deleteFRelacaoMP`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -2010,7 +2012,7 @@ function deleteFRelacaoMP(id) {
 function deleteFRelacaoR(id) {
 
     if (confirm("Deseja mesmo deletar essa relação?")) {
-        fetch("http://localhost:3303/deleteFRelacaoR", {
+        fetch(`${API_URL}/deleteFRelacaoR`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -2026,7 +2028,7 @@ function deleteFRelacaoR(id) {
 //-------------------------------Deletar relação E------------------------------------
 function deleteFRelacaoE(id) {
     if (confirm("Deseja mesmo deletar essa relação?")) {
-        fetch("http://localhost:3303/deleteFRelacaoE", {
+        fetch(`${API_URL}/deleteFRelacaoE`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -2044,7 +2046,7 @@ function deleteFRelacaoE(id) {
 function observacoes(produtos) {
     var ob = document.getElementById("w3review").value
 
-    fetch("http://localhost:3303/adicionaObservacao", {
+    fetch(`${API_URL}/adicionaObservacao`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2079,7 +2081,7 @@ function guardaMateriaprima(n) {
 
 function baixaMateriaPrima(id, quant) {
     console.log(id, quant)
-    fetch("http://localhost:3303/baixaMateriaPrima", {
+    fetch(`${API_URL}/baixaMateriaPrima`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2097,7 +2099,7 @@ function baixaMateriaPrima(id, quant) {
 function baixaEmbalagem(id, i) {
     var quant = document.getElementById(`qtd-${i}`).value
     console.log(id)
-    fetch("http://localhost:3303/baixaEmbalagem", {
+    fetch(`${API_URL}/baixaEmbalagem`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2114,7 +2116,7 @@ function baixaEmbalagem(id, i) {
 function baixaRotulo(id, i) {
     var quant = document.getElementById(`qtd-${i}`).value
     console.log(id)
-    fetch("http://localhost:3303/baixaRotulo", {
+    fetch(`${API_URL}/baixaRotulo`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2170,7 +2172,7 @@ function verificarEstoque() {
 
     const id = document.getElementById("xxx").value
 
-    fetch("http://localhost:3303/verificarEstoque", {
+    fetch(`${API_URL}/verificarEstoque`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2381,7 +2383,7 @@ async function preencheTabelaMP() {
         
         let qtd = document.getElementById(`qtd-${index}`).value
         document.getElementsByClassName(`tabelaMP-${index}`)[0].innerHTML = ''
-        fetch("http://localhost:3303/preencheTabelaMP", {
+        fetch(`${API_URL}/preencheTabelaMP`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -2439,7 +2441,7 @@ function listarProdutos(tamanho) {
 
     document.getElementById(`selectProduto-${tamanho}`).innerHTML = ""
 
-    fetch("http://localhost:3303/listarProdutos", {
+    fetch(`${API_URL}/listarProdutos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -2520,7 +2522,7 @@ function cadastrarFormulas(produto) {
 
     dados = JSON.parse(dados)
     id_produto = JSON.parse(id_produto)
-    fetch("http://localhost:3303/cadastrarFormula", {
+    fetch(`${API_URL}/cadastrarFormula`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2541,7 +2543,7 @@ function cadastrarFormulas(produto) {
 
 async function simuladorEmbalagens() {
     var id_produto = document.getElementById("selectProduto-0").value
-    var response = await fetch("http://localhost:3303/selectEmbalagem", {
+    var response = await fetch(`${API_URL}/selectEmbalagem`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2549,7 +2551,7 @@ async function simuladorEmbalagens() {
         })
     })
     var embalagens = await response.json()
-    response = await fetch("http://localhost:3303/selectProdEmbalagem", {
+    response = await fetch(`${API_URL}/selectProdEmbalagem`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2563,7 +2565,7 @@ async function simuladorEmbalagens() {
 //=================================================================================//
 async function getProducaoEspecifica(producao_id) {
     console.log("passei aki 2")
-    var response = await fetch("http://localhost:3303/listarProducaoEspecifica", {
+    var response = await fetch(`${API_URL}/listarProducaoEspecifica`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2575,7 +2577,7 @@ async function getProducaoEspecifica(producao_id) {
 }
 
 function getProducoes() {
-    fetch("http://localhost:3303/listarProducoes", {
+    fetch(`${API_URL}/listarProducoes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -2914,7 +2916,7 @@ async function setModalHistoricoDeProducao(id) {
 }
 
 async function pegadosMpsplit(mpValue){
-    var response = await fetch("http://localhost:3303/listarMateriaPrimaMod", {
+    var response = await fetch(`${API_URL}/listarMateriaPrimaMod`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2927,7 +2929,7 @@ async function pegadosMpsplit(mpValue){
 
 async function pegaDadosSplit(formula, idEmbalagem, idEmbalagem2, idRotulo, ContraRotulo) {
     var dados= []
-    var response = await fetch("http://localhost:3303/listarformulasid", {
+    var response = await fetch(`${API_URL}/listarformulasid`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2935,7 +2937,7 @@ async function pegaDadosSplit(formula, idEmbalagem, idEmbalagem2, idRotulo, Cont
         })
     })
     dados.push(await response.json())
-    var response = await fetch("http://localhost:3303/listarEmbalagem", {
+    var response = await fetch(`${API_URL}/listarEmbalagem`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2943,7 +2945,7 @@ async function pegaDadosSplit(formula, idEmbalagem, idEmbalagem2, idRotulo, Cont
         })
     })
     dados.push(await response.json())
-    var response = await fetch("http://localhost:3303/listarEmbalagem", {
+    var response = await fetch(`${API_URL}/listarEmbalagem`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2951,7 +2953,7 @@ async function pegaDadosSplit(formula, idEmbalagem, idEmbalagem2, idRotulo, Cont
         })
     })
     dados.push(await response.json())
-    var response = await fetch("http://localhost:3303/listarRotuloMod", {
+    var response = await fetch(`${API_URL}/listarRotuloMod`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2959,7 +2961,7 @@ async function pegaDadosSplit(formula, idEmbalagem, idEmbalagem2, idRotulo, Cont
         })
     })
     dados.push(await response.json())
-    var response = await fetch("http://localhost:3303/listarRotuloMod", {
+    var response = await fetch(`${API_URL}/listarRotuloMod`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2976,7 +2978,7 @@ async function pegaDadosSplit(formula, idEmbalagem, idEmbalagem2, idRotulo, Cont
 //COLOCAR INFORMAÇÕES NOS MODAIS
 async function getMudancas(producao_id) {
     console.log("passei aki 2")
-    var response = await fetch("http://localhost:3303/listarMudancas", {
+    var response = await fetch(`${API_URL}/listarMudancas`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2990,7 +2992,7 @@ async function getMudancas(producao_id) {
 
 async function getModalHistoricoMateriaPrima(producao_id) {
     console.log("passei aki 2")
-    var response = await fetch("http://localhost:3303/listarMateriaPrimaDaProducao", {
+    var response = await fetch(`${API_URL}/listarMateriaPrimaDaProducao`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -3005,7 +3007,7 @@ async function getModalHistoricoMateriaPrima(producao_id) {
 async function getModalHistoricoRotulo(producao_id) {
 
     console.log("passei aki 2")
-    var response = await fetch("http://localhost:3303/listarRotuloDaProducao", {
+    var response = await fetch(`${API_URL}/listarRotuloDaProducao`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -3022,7 +3024,7 @@ async function getModalHistoricoRotulo(producao_id) {
 //Core home page - VITOR MOICANO 
 //=================================================================================//
 function homePageMateriaPrimaFaltante() {
-    fetch("http://localhost:3303/listarMateriaPrimaMin", {
+    fetch(`${API_URL}/listarMateriaPrimaMin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -3042,7 +3044,7 @@ function homePageMateriaPrimaFaltante() {
 }
 
 function producoesUltimaSemana() {
-    fetch("http://localhost:3303/producoesUltimaSemana", {
+    fetch(`${API_URL}/producoesUltimaSemana`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -3078,7 +3080,7 @@ function displayUsuarioComum() {
 //=================================================================================//
 function eliminaProducaoMaiorQue5() {
 
-    fetch("http://localhost:3303/eliminaProducaoMaiorQue5", {
+    fetch(`${API_URL}/eliminaProducaoMaiorQue5`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -3093,7 +3095,7 @@ function eliminaProducaoMaiorQue5() {
 //=================================================================================//
 function listaUsuarios() {
 
-    fetch("http://localhost:3303/listaUsuarios", {
+    fetch(`${API_URL}/listaUsuarios`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -3128,7 +3130,7 @@ async function dadoUsuario(id) {
     var element = document.getElementById("quadrante-direito");
     element.style.display = "flex";
 
-    fetch("http://localhost:3303/usuarioEspecifico", {
+    fetch(`${API_URL}/usuarioEspecifico`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -3228,7 +3230,7 @@ async function dadoUsuario(id) {
 
 function deletarUsuario() {
     const id_usuario_permissao = JSON.parse(localStorage.getItem('id_usuario_permissao'));
-    fetch("http://localhost:3303/deletarUsuario", {
+    fetch(`${API_URL}/deletarUsuario`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -3248,7 +3250,7 @@ function alterarNomeUsuario() {
     const id_usuario_permissao = JSON.parse(localStorage.getItem('id_usuario_permissao'));
     var novoNome = document.getElementById('input-de-info').value
     console.log(novoNome)
-    fetch("http://localhost:3303/alterarNomeUsuario", {
+    fetch(`${API_URL}/alterarNomeUsuario`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -3269,7 +3271,7 @@ function alterarEmailUsuario() {
     const id_usuario_permissao = JSON.parse(localStorage.getItem('id_usuario_permissao'));
     var novoEmail = document.getElementById('input-de-info').value
     //console.log(novoEmail)
-    fetch("http://localhost:3303/alterarEmailUsuario", {
+    fetch(`${API_URL}/alterarEmailUsuario`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -3336,7 +3338,7 @@ function alterarNievlDePermissao() {
     console.log(id.perm)
     console.log(id.id_ls)
 
-    fetch("http://localhost:3303/alterarPermissaoUsuario", {
+    fetch(`${API_URL}/alterarPermissaoUsuario`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -3363,7 +3365,7 @@ function zeraLocalStorage() {
 async function selcetEmbEspSimuProd(id) {
     console.log(id)
 
-    var response = await fetch("http://localhost:3303/listarEmbalagem", {
+    var response = await fetch(`${API_URL}/listarEmbalagem`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -3383,7 +3385,7 @@ async function selcetEmbEspSimuProd(id) {
 //Lista Materia prima minima
 async function listaMateriaPrimaMin() {
 
-    fetch("http://localhost:3303/listarMateriaPrimaMin", {
+    fetch(`${API_URL}/listarMateriaPrimaMin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -3414,7 +3416,7 @@ async function listaMateriaPrimaMin() {
     })
     //________________________________________________________________
 
-    fetch("http://localhost:3303/listarEmbalagemMin", {
+    fetch(`${API_URL}/listarEmbalagemMin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -3445,7 +3447,7 @@ async function listaMateriaPrimaMin() {
     })
 
     //________________________________________________________________
-    fetch("http://localhost:3303/listarRotuloMin", {
+    fetch(`${API_URL}/listarRotuloMin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
     }).then(function (res) {
@@ -3500,7 +3502,7 @@ async function abremodalMin(i) {
     var dadosSession = []
     for (let cont = 0; cont < idsMateria.length; cont++) {
         var id = idsMateria[cont]
-        let response = await fetch("http://localhost:3303/listarMateriaPrimaMod", {
+        let response = await fetch(`${API_URL}/listarMateriaPrimaMod`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -3538,7 +3540,7 @@ async function abremodalMin(i) {
     var dadosSessionEm=[]
     for (let cont = 0; cont < idsEmbalagem.length; cont++) {
         var id = idsEmbalagem[cont]
-       let response=await fetch("http://localhost:3303/listarEmbalagemMod", {
+       let response=await fetch(`${API_URL}/listarEmbalagemMod`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -3576,7 +3578,7 @@ async function abremodalMin(i) {
     for (let cont = 0; cont < idsRotulo.length; cont++) {
         var id = idsRotulo[cont]
 
-       let response=await fetch("http://localhost:3303/listarRotuloMod", {
+       let response=await fetch(`${API_URL}/listarRotuloMod`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -3600,7 +3602,7 @@ async function pegaFornecedor(data, tipo) {
 
     switch (tipo) {
         case 1:
-                var resp = await fetch("http://localhost:3303/listarFornecedorMateriaPrimaMin", {
+                var resp = await fetch(`${API_URL}/listarFornecedorMateriaPrimaMin`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -3614,7 +3616,7 @@ async function pegaFornecedor(data, tipo) {
         case 2:
             console.log("Embalagem")
                 
-                var resp=await fetch("http://localhost:3303/listarFornecedorEmbalagemMin", {
+                var resp=await fetch(`${API_URL}/listarFornecedorEmbalagemMin`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -3628,7 +3630,7 @@ async function pegaFornecedor(data, tipo) {
         case 3:
             console.log("Rotulo")
         
-            var resp=await fetch("http://localhost:3303/listarFornecedorRotuloMin", {
+            var resp=await fetch(`${API_URL}/listarFornecedorRotuloMin`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -3649,7 +3651,7 @@ async function pegaFornecedor(data, tipo) {
 
 async function testeMP3(data) {
     console.log(data.id)
-        var response = await fetch("http://localhost:3303/listarFornecedorMateriaPrimaMin", {
+        var response = await fetch(`${API_URL}/listarFornecedorMateriaPrimaMin`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -3664,7 +3666,7 @@ async function testeMP3(data) {
 
 async function testeMP2(data) {
 //console.log(data)
-    var response = await fetch("http://localhost:3303/listarFornecedorMateriaPrimaMin", {
+    var response = await fetch(`${API_URL}/listarFornecedorMateriaPrimaMin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -3684,7 +3686,7 @@ async function testeMP(idsMateria, idsEmbalagem, idsRotulo) {
     var dadosSession = []
     for (let cont = 0; cont < idsMateria.length; cont++) {
         var id = idsMateria[cont]
-        let response = await fetch("http://localhost:3303/listarMateriaPrimaMod", {
+        let response = await fetch(`${API_URL}/listarMateriaPrimaMod`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -3705,7 +3707,7 @@ async function testeMP(idsMateria, idsEmbalagem, idsRotulo) {
     var dadosSessionEm=[]
     for (let cont = 0; cont < idsEmbalagem.length; cont++) {
         var id = idsEmbalagem[cont]
-       let response=await fetch("http://localhost:3303/listarEmbalagemMod", {
+       let response=await fetch(`${API_URL}/listarEmbalagemMod`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -3727,7 +3729,7 @@ async function testeMP(idsMateria, idsEmbalagem, idsRotulo) {
     for (let cont = 0; cont < idsRotulo.length; cont++) {
         var id = idsRotulo[cont]
 
-       let response=await fetch("http://localhost:3303/listarRotuloMod", {
+       let response=await fetch(`${API_URL}/listarRotuloMod`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -3898,7 +3900,7 @@ async function preencheModalCompras() {
 }
 
 function testeEmbalagem(id, quant) {
-    fetch("http://localhost:3303/getMP", {
+    fetch(`${API_URL}/getMP`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Methods': '*' },
         body: JSON.stringify({
