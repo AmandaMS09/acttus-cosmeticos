@@ -120,3 +120,5 @@ app.post("/listarFornecedorEmbalagemMin", listarFornecedorEmbalagemMin)
 app.post("/baixaRotulo", baixaRotulo)
 app.post("/listarRotuloMin", listarRotuloMin)
 app.post("/listarRotuloMin", listarRotuloMin)
+
+module.exports = app;

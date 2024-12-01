@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo 'Testes ainda não implementados'",
-    "start": "nodemon app.js",
+    "start": "nodemon /server/index.js",
     "test:cucumber": "cucumber-js",
-    "app": "nodemon /server/index.js"
+    "app": "node /server/index.js"
   },
   "keywords": [
     "controle",
