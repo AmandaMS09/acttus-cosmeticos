@@ -5,11 +5,11 @@
   "main": "server/index.js",
   "type": "module",
   "scripts": {
-    "test": "jest",
     "start": "nodemon /server/index.js",
-    "test:mocha": "mocha 'server/test/**/*.js'",
+    "test": "Aplicação funcionando",
+    "start": "nodemon app.js",
+    "test:mocha": "mocha --exit 'server/test/**/*.js'",
     "test:cucumber": "cucumber-js",
-    "app": "node /server/index.js"
   },
   "keywords": [
     "controle",
