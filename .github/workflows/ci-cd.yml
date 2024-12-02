@@ -1,6 +1,8 @@
 name: CI/CD Pipeline
 
 env:
+  SUPABASE_URL: 'https://gltustnhaqwwjigoerrx.supabase.co'
+  SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdHVzdG5oYXF3d2ppZ29lcnJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI4MzQ0MDMsImV4cCI6MjA0ODQxMDQwM30.O_HEJ9CTo5GYX06xj0OEBxvWeT1lYlKuP2ThnezvKCM'
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
   
@@ -32,6 +34,9 @@ jobs:
 
     - name: Run Mocha tests
       working-directory: Codigo
+      env:
+        SUPABASE_URL: 'https://gltustnhaqwwjigoerrx.supabase.co'
+        SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdHVzdG5oYXF3d2ppZ29lcnJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI4MzQ0MDMsImV4cCI6MjA0ODQxMDQwM30.O_HEJ9CTo5GYX06xj0OEBxvWeT1lYlKuP2ThnezvKCM'
       run: npm run test:mocha
 
 
@@ -40,8 +45,8 @@ jobs:
         SUPABASE_URL: 'https://gltustnhaqwwjigoerrx.supabase.co'
         SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdHVzdG5oYXF3d2ppZ29lcnJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI4MzQ0MDMsImV4cCI6MjA0ODQxMDQwM30.O_HEJ9CTo5GYX06xj0OEBxvWeT1lYlKuP2ThnezvKCM'
       run: |
-        echo "SUPABASE_URL=${{ env.SUPABASE_URL }}"
-        [ -z "${{ env.SUPABASE_KEY }}" ] && echo "SUPABASE_KEY is missing" || echo "SUPABASE_KEY is set"
+        echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}"
+        [ -z "${{ secrets.SUPABASE_KEY }}" ] && echo "SUPABASE_KEY is missing" || echo "SUPABASE_KEY is set"
 
   deploy:
     needs: build-and-test
