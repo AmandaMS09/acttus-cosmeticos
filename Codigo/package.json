@@ -8,7 +8,7 @@
     "app": "nodemon /server/index.js",
     "test": "Aplicação funcionando",
     "start": "nodemon app.js",
-    "test:mocha": "mocha 'server/test/**/*.js'",
+    "test:mocha": "mocha --exit 'server/test/**/*.js'",
     "test:cucumber": "cucumber-js",
     "app": "nodemon /server/index.js"
   },
