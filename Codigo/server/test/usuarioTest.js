@@ -2,11 +2,22 @@ import request from 'supertest';
 import assert from 'assert';
 import app from '../index.js';
 
+function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
 describe('POST /cadastro', () => {
 	it('deve retornar erro quando usuário não receber permissão', (done) => {
+		const userName = generateRandomString(8)
 		const newUser = {
 			nome: "Um nome qualquer",
-			email: "umemail@qualquer.com",
+			email: `${userName}@qualquer.com`,
 			senha: "umasenhaqualquer"
 		}
 
