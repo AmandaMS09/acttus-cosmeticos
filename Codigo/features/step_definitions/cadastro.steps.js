@@ -1,7 +1,7 @@
 const API_URL='https://acttus-cosmeticos.vercel.app'
-import { Given, When, Then } from '@cucumber/cucumber';
-import fetch from 'node-fetch';
-import assert from 'assert';
+const { Given, When, Then } = require('@cucumber/cucumber');
+const fetch = require('node-fetch');
+const assert = require('assert');
 
 let response = {};
 let usuario = { nome: '', email: '', senha: '' };
