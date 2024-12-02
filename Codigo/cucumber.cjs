@@ -1,3 +1,3 @@
 module.exports = {
-    default: '--require features/step_definitions/*.js --format progress'
+    default: '--import features/step_definitions/*.js --format progress'
 };
