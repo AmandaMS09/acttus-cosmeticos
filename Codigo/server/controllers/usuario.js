@@ -6,13 +6,13 @@ export const cadastro = async (req, res) => {
     const {
       nome,
       email,
-      senha
+      senha,
     } = req.body
 
     const { data: registerData, error } = await db.from('usuario').insert({
       nome: nome,
       senha: senha,
-      email: email
+      email: email,
     }).select()
 
     if (error) {
