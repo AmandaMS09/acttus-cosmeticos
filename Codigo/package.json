@@ -9,7 +9,7 @@
     "test": "Aplicação funcionando",
     "start": "nodemon app.js",
     "test:mocha": "mocha --exit 'server/test/**/*.js'",
-    "test:cucumber": "cucumber-js",
+    "test:cucumber": "cucumber-js"
   },
   "keywords": [
     "controle",
