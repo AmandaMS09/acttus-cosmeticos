@@ -39,6 +39,13 @@ jobs:
         SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdHVzdG5oYXF3d2ppZ29lcnJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI4MzQ0MDMsImV4cCI6MjA0ODQxMDQwM30.O_HEJ9CTo5GYX06xj0OEBxvWeT1lYlKuP2ThnezvKCM'
       run: npm run test:mocha
 
+    - name: Run unit tests
+      working-directory: Codigo
+      env:
+        SUPABASE_URL: 'https://gltustnhaqwwjigoerrx.supabase.co'
+        SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdHVzdG5oYXF3d2ppZ29lcnJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI4MzQ0MDMsImV4cCI6MjA0ODQxMDQwM30.O_HEJ9CTo5GYX06xj0OEBxvWeT1lYlKuP2ThnezvKCM'
+      run: npm run test
+
 
     - name: Debug Environment Variables
       env:

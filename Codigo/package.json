@@ -5,9 +5,9 @@
   "main": "server/index.js",
   "type": "module",
   "scripts": {
+    "app": "node /server/index.js",
     "start": "nodemon /server/index.js",
-    "test": "Aplicação funcionando",
-    "start": "nodemon app.js",
+    "test": "jest",
     "test:mocha": "mocha --exit 'server/test/**/*.js'",
     "test:cucumber": "cucumber-js"
   },
